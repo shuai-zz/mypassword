@@ -20,7 +20,7 @@
     <x:String x:Key="settings.tab.password">Password</x:String>
     <x:String x:Key="settings.tab.extension">Extension</x:String>
     <x:String x:Key="settings.keep_tray_icon">Keep MyPassword in the notification area.</x:String>
-    <x:String x:Key="settings.language">Language: (Restart MyPassword to take effect)</x:String>
+    <x:String x:Key="settings.language">Language: (Restart to take effect)</x:String>
     <x:String x:Key="settings.language.system">System default</x:String>
     <x:String x:Key="settings.language.name.en">English</x:String>
     <x:String x:Key="settings.language.name.zh">中文</x:String>
