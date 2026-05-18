@@ -6,6 +6,7 @@ using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Threading;
 using MyPasswordDesktop.Core;
 using MyPasswordDesktop.Core.Data;
 using MyPasswordDesktop.Core.Entities;
@@ -31,6 +32,12 @@ namespace MyPasswordDesktop.Views
             BuildSecurity();
             BuildPassword();
             BuildExtension();
+
+            // OAuth login completes on an HTTP thread — rebuild the rows so the
+            // status updates from "<not logged in>" without reopening Settings.
+            VaultManager.Current.SetOnOAuthChanged(() =>
+                Dispatcher.UIThread.Post(BuildOAuthRows));
+            Closed += (_, _) => VaultManager.Current.SetOnOAuthChanged(null);
         }
 
         private static VaultManager Vault => VaultManager.Current;
