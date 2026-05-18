@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyPasswordDesktop.Services;
@@ -24,6 +25,18 @@ namespace MyPasswordDesktop.ViewModels
 
         [ObservableProperty]
         private bool _revealed;
+
+        /// <summary>TOTP countdown pie geometry (only set for <see cref="KindTotp"/> rows).</summary>
+        [ObservableProperty]
+        private Geometry _totpPie;
+
+        /// <summary>TOTP countdown pie fill — turns red in the final seconds.</summary>
+        [ObservableProperty]
+        private IBrush _totpPieBrush;
+
+        /// <summary>True during the final seconds before the TOTP code rolls over.</summary>
+        [ObservableProperty]
+        private bool _totpWarning;
 
         private readonly string _plain;
 

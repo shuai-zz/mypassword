@@ -3,6 +3,12 @@
              xmlns:vm="using:MyPasswordDesktop.ViewModels"
              x:Class="MyPasswordDesktop.Views.ItemDetailView"
              x:DataType="vm:ItemDetailViewModel">
+    <UserControl.Styles>
+        <!-- TOTP code turns red in its final seconds (see DetailRow.TotpWarning) -->
+        <Style Selector="TextBlock.totpWarn">
+            <Setter Property="Foreground" Value="#E04F4F" />
+        </Style>
+    </UserControl.Styles>
     <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="10">
 
         <!-- action bar -->
@@ -38,12 +44,17 @@
                                     <Button Grid.Column="2" Content="{DynamicResource password.btn.copy}"
                                             Command="{Binding CopyCommand}" Padding="8,2" Margin="6,0,0,0" />
                                 </Grid>
-                                <!-- totp -->
-                                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding IsTotp}">
+                                <!-- totp: code + depleting countdown pie + copy -->
+                                <Grid ColumnDefinitions="Auto,Auto,*,Auto" IsVisible="{Binding IsTotp}">
                                     <TextBlock Grid.Column="0" Text="{Binding Value}"
+                                               Classes.totpWarn="{Binding TotpWarning}"
                                                FontFamily="Consolas,Menlo,monospace" FontSize="15"
                                                VerticalAlignment="Center" />
-                                    <Button Grid.Column="1" Content="{DynamicResource password.btn.copy}"
+                                    <Path Grid.Column="1" Width="16" Height="16" Margin="10,0,0,0"
+                                          VerticalAlignment="Center" Stretch="None"
+                                          Fill="{Binding TotpPieBrush}" Data="{Binding TotpPie}"
+                                          ToolTip.Tip="{Binding Label}" />
+                                    <Button Grid.Column="3" Content="{DynamicResource password.btn.copy}"
                                             Command="{Binding CopyCommand}" Padding="8,2" Margin="6,0,0,0" />
                                 </Grid>
                                 <!-- multi -->
