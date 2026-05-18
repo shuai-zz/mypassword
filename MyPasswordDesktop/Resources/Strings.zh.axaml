@@ -28,7 +28,7 @@
     <x:String x:Key="settings.db_file">数据库文件：</x:String>
     <x:String x:Key="settings.minutes">{0} 分钟</x:String>
     <x:String x:Key="settings.days">{0} 天</x:String>
-    <x:String x:Key="settings.never">永不</x:String>
+    <x:String x:Key="settings.never">永不删除</x:String>
     <x:String x:Key="settings.password.current">当前密码：</x:String>
     <x:String x:Key="settings.password.new">新密码：</x:String>
     <x:String x:Key="settings.password.confirm">确认新密码：</x:String>
@@ -55,7 +55,7 @@
     <x:String x:Key="settings.extension.btn.reject">拒绝</x:String>
     <x:String x:Key="settings.extension.btn.unpair">取消配对</x:String>
     <x:String x:Key="settings.extension.confirm.unpair">取消配对扩展 "{0}"？</x:String>
-    <x:String x:Key="settings.extension.hint">请访问以获取扩展：</x:String>
+    <x:String x:Key="settings.extension.hint">请访问以下链接以获取扩展：</x:String>
     <x:String x:Key="settings.extension.url">https://mypassword.puppylab.org/extension/</x:String>
 
     <!-- Vault Locator Dialog -->
