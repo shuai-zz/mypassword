@@ -1,0 +1,183 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- MyPassword i18n — 中文 (Simplified Chinese). -->
+
+    <!-- App -->
+    <x:String x:Key="app.name">MyPassword</x:String>
+
+    <!-- Tray -->
+    <x:String x:Key="tray.open">打开 MyPassword</x:String>
+    <x:String x:Key="tray.lock">锁定 MyPassword</x:String>
+    <x:String x:Key="tray.settings">设置...</x:String>
+    <x:String x:Key="tray.exit">退出</x:String>
+
+    <!-- Settings Dialog -->
+    <x:String x:Key="settings.title">设置</x:String>
+    <x:String x:Key="settings.tab.general">常规</x:String>
+    <x:String x:Key="settings.tab.security">安全</x:String>
+    <x:String x:Key="settings.tab.password">密码</x:String>
+    <x:String x:Key="settings.tab.extension">扩展</x:String>
+    <x:String x:Key="settings.keep_tray_icon">在通知区域中保留 MyPassword。</x:String>
+    <x:String x:Key="settings.language">语言：(重启 MyPassword 后生效)</x:String>
+    <x:String x:Key="settings.language.system">系统默认</x:String>
+    <x:String x:Key="settings.language.name.en">English</x:String>
+    <x:String x:Key="settings.language.name.zh">中文</x:String>
+    <x:String x:Key="settings.auto_lock">设备空闲后自动锁定：</x:String>
+    <x:String x:Key="settings.clear_clipboard">复制的密码保留时长：</x:String>
+    <x:String x:Key="settings.delete_after">回收站项目保留时长：</x:String>
+    <x:String x:Key="settings.db_file">数据库文件：</x:String>
+    <x:String x:Key="settings.minutes">{0} 分钟</x:String>
+    <x:String x:Key="settings.days">{0} 天</x:String>
+    <x:String x:Key="settings.never">永不</x:String>
+    <x:String x:Key="settings.password.current">当前密码：</x:String>
+    <x:String x:Key="settings.password.new">新密码：</x:String>
+    <x:String x:Key="settings.password.confirm">确认新密码：</x:String>
+    <x:String x:Key="settings.password.btn.change">修改密码</x:String>
+    <x:String x:Key="settings.password.success">密码修改成功。</x:String>
+    <x:String x:Key="settings.password.error.wrong">当前密码不正确。</x:String>
+    <x:String x:Key="settings.password.error.too_short">新密码至少需要 {0} 个字符。</x:String>
+    <x:String x:Key="settings.password.error.mismatch">两次输入的新密码不一致。</x:String>
+
+    <!-- OAuth -->
+    <x:String x:Key="settings.oauth.hint">您可以登录 OAuth 帐户来解锁保险库。</x:String>
+    <x:String x:Key="settings.oauth.provider">提供方</x:String>
+    <x:String x:Key="settings.oauth.logged_in_as">已登录为</x:String>
+    <x:String x:Key="settings.oauth.not_logged_in">&lt;未登录&gt;</x:String>
+    <x:String x:Key="settings.oauth.btn.login">登录</x:String>
+    <x:String x:Key="settings.oauth.btn.disconnect">断开连接</x:String>
+    <x:String x:Key="settings.oauth.confirm.disconnect">确定要断开 {0} 吗？</x:String>
+
+    <!-- Extension tab -->
+    <x:String x:Key="settings.extension.name">名称</x:String>
+    <x:String x:Key="settings.extension.device">设备</x:String>
+    <x:String x:Key="settings.extension.none">尚未配对任何扩展。</x:String>
+    <x:String x:Key="settings.extension.btn.approve">批准</x:String>
+    <x:String x:Key="settings.extension.btn.reject">拒绝</x:String>
+    <x:String x:Key="settings.extension.btn.unpair">取消配对</x:String>
+    <x:String x:Key="settings.extension.confirm.unpair">取消配对扩展 "{0}"？</x:String>
+    <x:String x:Key="settings.extension.hint">请访问以获取扩展：</x:String>
+    <x:String x:Key="settings.extension.url">https://mypassword.puppylab.org/extension/</x:String>
+
+    <!-- Vault Locator Dialog -->
+    <x:String x:Key="locate.title">定位保险库</x:String>
+    <x:String x:Key="locate.heading">您的保险库在哪里？</x:String>
+    <x:String x:Key="locate.hint">MyPassword 可将加密保险库存放在磁盘任意位置（例如放在 OneDrive 文件夹中以便自动同步）。请指向已有的保险库文件，或新建一个。</x:String>
+    <x:String x:Key="locate.btn.open">打开已有保险库...</x:String>
+    <x:String x:Key="locate.btn.create">新建保险库...</x:String>
+    <x:String x:Key="locate.open.title">选择已有保险库文件</x:String>
+    <x:String x:Key="locate.create.title">选择新保险库所在文件夹</x:String>
+    <x:String x:Key="locate.create.message">新的保险库文件将创建在此文件夹中。</x:String>
+    <x:String x:Key="locate.file.filter">MyPassword 保险库 (*.db)</x:String>
+    <x:String x:Key="locate.error.not_a_file">所选路径不是普通文件。</x:String>
+    <x:String x:Key="locate.error.already_exists">无法在所选文件夹创建保险库文件，因为已存在保险库。</x:String>
+    <x:String x:Key="locate.error.pointer">无法保存保险库位置：{0}</x:String>
+    <x:String x:Key="locate.error.create">无法创建保险库文件：{0}</x:String>
+
+    <!-- Init Vault Dialog -->
+    <x:String x:Key="init.title">设置主密码</x:String>
+    <x:String x:Key="init.heading">创建主密码</x:String>
+    <x:String x:Key="init.hint">此密码用于保护您的保险库。一旦丢失将无法恢复。</x:String>
+    <x:String x:Key="init.password.placeholder">密码（{0}–{1} 个字符）</x:String>
+    <x:String x:Key="init.confirm.placeholder">确认密码</x:String>
+    <x:String x:Key="init.btn.create">初始化保险库</x:String>
+    <x:String x:Key="init.btn.cancel">取消</x:String>
+    <x:String x:Key="init.error.too_short">密码至少需要 {0} 个字符。</x:String>
+    <x:String x:Key="init.error.mismatch">两次输入的密码不一致。</x:String>
+
+    <!-- Unlock View -->
+    <x:String x:Key="unlock.hint">输入主密码以解锁保险库。</x:String>
+    <x:String x:Key="unlock.password.placeholder">主密码（8–50 个字符）</x:String>
+    <x:String x:Key="unlock.btn">解锁</x:String>
+    <x:String x:Key="unlock.error.wrong_password">密码错误，请重试。</x:String>
+    <x:String x:Key="unlock.oauth.hint">如果忘记密码，您可以通过 OAuth 解锁保险库：</x:String>
+
+    <!-- Toolbar -->
+    <x:String x:Key="toolbar.btn.add_new">新建</x:String>
+    <x:String x:Key="toolbar.search.placeholder">搜索...</x:String>
+    <x:String x:Key="toolbar.btn.settings">设置</x:String>
+    <x:String x:Key="toolbar.btn.lock">锁定</x:String>
+    <x:String x:Key="toolbar.menu.login">登录信息</x:String>
+    <x:String x:Key="toolbar.menu.note">笔记</x:String>
+    <x:String x:Key="toolbar.menu.identity">身份信息</x:String>
+
+    <!-- Categories -->
+    <x:String x:Key="category.all">全部项目</x:String>
+    <x:String x:Key="category.favorites">收藏夹</x:String>
+    <x:String x:Key="category.logins">登录信息</x:String>
+    <x:String x:Key="category.notes">笔记</x:String>
+    <x:String x:Key="category.identities">身份信息</x:String>
+    <x:String x:Key="category.trash">回收站</x:String>
+
+    <!-- Empty View -->
+    <x:String x:Key="empty.hint">请从列表中选择一项，或点击"+ 新建"。</x:String>
+
+    <!-- Detail View -->
+    <x:String x:Key="detail.btn.edit">编辑</x:String>
+    <x:String x:Key="detail.btn.delete">删除</x:String>
+    <x:String x:Key="detail.btn.restore">恢复</x:String>
+    <x:String x:Key="detail.last_edit">最后编辑于：{0}</x:String>
+
+    <!-- Edit View -->
+    <x:String x:Key="edit.btn.save">保存</x:String>
+    <x:String x:Key="edit.btn.cancel">取消</x:String>
+    <x:String x:Key="edit.btn.add_more">添加更多</x:String>
+
+    <!-- Field Labels -->
+    <x:String x:Key="field.title">标题：</x:String>
+    <x:String x:Key="field.username">用户名：</x:String>
+    <x:String x:Key="field.password">密码：</x:String>
+    <x:String x:Key="field.totp">TOTP 两步验证：</x:String>
+    <x:String x:Key="field.passkey">通行密钥：</x:String>
+    <x:String x:Key="field.websites">网站：</x:String>
+    <x:String x:Key="field.memo">备注：</x:String>
+    <x:String x:Key="field.content">内容：</x:String>
+    <x:String x:Key="field.name">姓名：</x:String>
+    <x:String x:Key="field.email">邮箱：</x:String>
+    <x:String x:Key="field.passport">护照号：</x:String>
+    <x:String x:Key="field.id_number">证件号：</x:String>
+    <x:String x:Key="field.tax_number">税号：</x:String>
+    <x:String x:Key="field.mobiles">手机：</x:String>
+    <x:String x:Key="field.telephones">电话：</x:String>
+    <x:String x:Key="field.address">地址：</x:String>
+    <x:String x:Key="field.zip_code">邮编：</x:String>
+
+    <!-- Password Generation -->
+    <x:String x:Key="password.gen.alpha_num">字母 + 数字</x:String>
+    <x:String x:Key="password.gen.alpha">仅字母</x:String>
+    <x:String x:Key="password.gen.num">仅数字</x:String>
+    <x:String x:Key="password.gen.symbol">含符号</x:String>
+    <x:String x:Key="password.gen.btn">生成</x:String>
+
+    <!-- Password Actions -->
+    <x:String x:Key="password.btn.copy">复制</x:String>
+    <x:String x:Key="password.menu.show">显示密码</x:String>
+    <x:String x:Key="password.menu.hide">隐藏密码</x:String>
+    <x:String x:Key="password.menu.show_large">放大显示密码</x:String>
+    <x:String x:Key="password.dialog.title">密码</x:String>
+    <x:String x:Key="password.tip.copied">已复制到剪贴板</x:String>
+
+    <!-- Passkey / TOTP -->
+    <x:String x:Key="passkey.btn.delete">删除通行密钥</x:String>
+    <x:String x:Key="passkey.confirm.delete">删除 "{0}" 的通行密钥？此操作无法撤销。</x:String>
+    <x:String x:Key="totp.btn.delete">删除 TOTP</x:String>
+    <x:String x:Key="totp.confirm.delete">删除 "{0}" 的 TOTP？此操作无法撤销。</x:String>
+
+    <!-- Confirm Dialogs -->
+    <x:String x:Key="confirm.title">确认</x:String>
+    <x:String x:Key="confirm.delete">删除 "{0}"？</x:String>
+    <x:String x:Key="unsaved.title">未保存的更改</x:String>
+    <x:String x:Key="unsaved.message">您有未保存的更改。</x:String>
+    <x:String x:Key="unsaved.btn.save">保存</x:String>
+    <x:String x:Key="unsaved.btn.discard">放弃</x:String>
+    <x:String x:Key="unsaved.btn.cancel">取消</x:String>
+
+    <!-- Pairing -->
+    <x:String x:Key="pair.title">扩展配对请求</x:String>
+    <x:String x:Key="pair.message">设备 "{1}" 上的扩展 "{0}" 请求与此应用配对。
+
+是否批准？</x:String>
+
+    <!-- Common -->
+    <x:String x:Key="common.ok">确定</x:String>
+    <x:String x:Key="common.cancel">取消</x:String>
+</ResourceDictionary>

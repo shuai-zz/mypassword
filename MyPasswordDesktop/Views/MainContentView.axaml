@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MyPasswordDesktop.ViewModels"
+             x:Class="MyPasswordDesktop.Views.MainContentView"
+             x:DataType="vm:MainContentViewModel">
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Toolbar -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto" Margin="6">
+            <Button Grid.Column="0" Content="{DynamicResource toolbar.btn.add_new}" Margin="0,0,6,0">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuItem Header="{DynamicResource toolbar.menu.login}"
+                                  Command="{Binding AddLoginCommand}" />
+                        <MenuItem Header="{DynamicResource toolbar.menu.note}"
+                                  Command="{Binding AddNoteCommand}" />
+                        <MenuItem Header="{DynamicResource toolbar.menu.identity}"
+                                  Command="{Binding AddIdentityCommand}" />
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+            <TextBox Grid.Column="1" Text="{Binding SearchText}"
+                     PlaceholderText="{DynamicResource toolbar.search.placeholder}" Margin="0,0,6,0" />
+            <Button Grid.Column="2" Content="{DynamicResource toolbar.btn.settings}"
+                    Command="{Binding SettingsCommand}" Margin="0,0,6,0" />
+            <Button Grid.Column="3" Content="{DynamicResource toolbar.btn.lock}"
+                    Command="{Binding LockCommand}" />
+        </Grid>
+
+        <!-- Body -->
+        <Grid Grid.Row="1" ColumnDefinitions="130,240,*">
+
+            <!-- Categories -->
+            <ListBox Grid.Column="0" ItemsSource="{Binding Categories}"
+                     SelectedItem="{Binding SelectedCategory}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:CategoryItem">
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- Item list -->
+            <ListBox Grid.Column="1" ItemsSource="{Binding Items}"
+                     SelectedItem="{Binding SelectedItemRow}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ItemRowViewModel">
+                        <Grid ColumnDefinitions="Auto,*" Height="44">
+                            <Border Grid.Column="0" Width="34" Height="34" CornerRadius="8"
+                                    Background="{Binding IconBrush}" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding IconLetter}" Foreground="White"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <StackPanel Grid.Column="1" Margin="9,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding Subtitle}" Foreground="Gray" FontSize="11"
+                                           TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- Right pane -->
+            <ContentControl Grid.Column="2" Content="{Binding RightContent}" />
+        </Grid>
+    </Grid>
+</UserControl>

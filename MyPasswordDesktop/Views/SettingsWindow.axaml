@@ -1,0 +1,88 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MyPasswordDesktop.Views.SettingsWindow"
+        Width="580" Height="540"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Title="{DynamicResource settings.title}">
+    <TabControl Margin="12">
+
+        <!-- General -->
+        <TabItem Header="{DynamicResource settings.tab.general}">
+            <StackPanel Margin="16" Spacing="14">
+                <CheckBox x:Name="TrayCheck" Content="{DynamicResource settings.keep_tray_icon}" />
+                <Grid ColumnDefinitions="*,200">
+                    <TextBlock Grid.Column="0" Text="{DynamicResource settings.language}"
+                               VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="1" x:Name="LangCombo" HorizontalAlignment="Stretch" />
+                </Grid>
+                <Grid ColumnDefinitions="*,200">
+                    <TextBlock Grid.Column="0" Text="{DynamicResource settings.delete_after}"
+                               VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="1" x:Name="DeleteAfterCombo" HorizontalAlignment="Stretch" />
+                </Grid>
+                <TextBlock x:Name="DbFileText" Foreground="Gray" TextWrapping="Wrap" />
+            </StackPanel>
+        </TabItem>
+
+        <!-- Security -->
+        <TabItem Header="{DynamicResource settings.tab.security}">
+            <StackPanel Margin="16" Spacing="14">
+                <Grid ColumnDefinitions="*,160">
+                    <TextBlock Grid.Column="0" Text="{DynamicResource settings.auto_lock}"
+                               VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="1" x:Name="AutoLockCombo" HorizontalAlignment="Stretch" />
+                </Grid>
+                <Grid ColumnDefinitions="*,160">
+                    <TextBlock Grid.Column="0" Text="{DynamicResource settings.clear_clipboard}"
+                               VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="1" x:Name="ClearClipboardCombo" HorizontalAlignment="Stretch" />
+                </Grid>
+            </StackPanel>
+        </TabItem>
+
+        <!-- Password -->
+        <TabItem Header="{DynamicResource settings.tab.password}">
+            <ScrollViewer>
+                <StackPanel Margin="16" Spacing="10">
+                    <Grid ColumnDefinitions="*,240" x:Name="CurrentRow">
+                        <TextBlock Grid.Column="0" Text="{DynamicResource settings.password.current}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Grid.Column="1" x:Name="CurrentPwBox" PasswordChar="&#x2022;" MaxLength="50" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,240">
+                        <TextBlock Grid.Column="0" Text="{DynamicResource settings.password.new}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Grid.Column="1" x:Name="NewPwBox" PasswordChar="&#x2022;" MaxLength="50" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,240">
+                        <TextBlock Grid.Column="0" Text="{DynamicResource settings.password.confirm}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Grid.Column="1" x:Name="ConfirmPwBox" PasswordChar="&#x2022;" MaxLength="50" />
+                    </Grid>
+                    <TextBlock x:Name="PwMessage" />
+                    <Button x:Name="ChangePwButton" Content="{DynamicResource settings.password.btn.change}"
+                            HorizontalAlignment="Right" />
+                    <Separator Margin="0,8" />
+                    <TextBlock Text="{DynamicResource settings.oauth.hint}" TextWrapping="Wrap" />
+                    <StackPanel x:Name="OAuthList" Spacing="4" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+        <!-- Extension -->
+        <TabItem Header="{DynamicResource settings.tab.extension}">
+            <ScrollViewer>
+                <StackPanel Margin="16" Spacing="6">
+                    <StackPanel x:Name="ExtensionList" Spacing="4" />
+                    <TextBlock Text="{DynamicResource settings.extension.hint}" Foreground="Gray"
+                               Margin="0,8,0,0" />
+                    <TextBlock x:Name="ExtensionUrl" Text="{DynamicResource settings.extension.url}"
+                               Foreground="#3070D0" Cursor="Hand" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+    </TabControl>
+</Window>

@@ -1,0 +1,183 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- MyPassword i18n — English (default). Converted from messages.properties. -->
+
+    <!-- App -->
+    <x:String x:Key="app.name">MyPassword</x:String>
+
+    <!-- Tray -->
+    <x:String x:Key="tray.open">Open MyPassword</x:String>
+    <x:String x:Key="tray.lock">Lock MyPassword</x:String>
+    <x:String x:Key="tray.settings">Settings...</x:String>
+    <x:String x:Key="tray.exit">Exit</x:String>
+
+    <!-- Settings Dialog -->
+    <x:String x:Key="settings.title">Settings</x:String>
+    <x:String x:Key="settings.tab.general">General</x:String>
+    <x:String x:Key="settings.tab.security">Security</x:String>
+    <x:String x:Key="settings.tab.password">Password</x:String>
+    <x:String x:Key="settings.tab.extension">Extension</x:String>
+    <x:String x:Key="settings.keep_tray_icon">Keep MyPassword in the notification area.</x:String>
+    <x:String x:Key="settings.language">Language: (Restart MyPassword to take effect)</x:String>
+    <x:String x:Key="settings.language.system">System default</x:String>
+    <x:String x:Key="settings.language.name.en">English</x:String>
+    <x:String x:Key="settings.language.name.zh">中文</x:String>
+    <x:String x:Key="settings.auto_lock">Lock after the device is idle for:</x:String>
+    <x:String x:Key="settings.clear_clipboard">Remove copied password after:</x:String>
+    <x:String x:Key="settings.delete_after">Delete items in trash after:</x:String>
+    <x:String x:Key="settings.db_file">Database file:</x:String>
+    <x:String x:Key="settings.minutes">{0} minute(s)</x:String>
+    <x:String x:Key="settings.days">{0} days</x:String>
+    <x:String x:Key="settings.never">Never</x:String>
+    <x:String x:Key="settings.password.current">Current password:</x:String>
+    <x:String x:Key="settings.password.new">New password:</x:String>
+    <x:String x:Key="settings.password.confirm">Confirm new password:</x:String>
+    <x:String x:Key="settings.password.btn.change">Change Password</x:String>
+    <x:String x:Key="settings.password.success">Password changed successfully.</x:String>
+    <x:String x:Key="settings.password.error.wrong">Current password is incorrect.</x:String>
+    <x:String x:Key="settings.password.error.too_short">New password must be at least {0} characters.</x:String>
+    <x:String x:Key="settings.password.error.mismatch">New passwords do not match.</x:String>
+
+    <!-- OAuth -->
+    <x:String x:Key="settings.oauth.hint">You can login to OAuth to unlock your vault.</x:String>
+    <x:String x:Key="settings.oauth.provider">Provider</x:String>
+    <x:String x:Key="settings.oauth.logged_in_as">Logged in as</x:String>
+    <x:String x:Key="settings.oauth.not_logged_in">&lt;not logged in&gt;</x:String>
+    <x:String x:Key="settings.oauth.btn.login">Login</x:String>
+    <x:String x:Key="settings.oauth.btn.disconnect">Disconnect</x:String>
+    <x:String x:Key="settings.oauth.confirm.disconnect">Do you want to disconnect {0}?</x:String>
+
+    <!-- Extension tab -->
+    <x:String x:Key="settings.extension.name">Name</x:String>
+    <x:String x:Key="settings.extension.device">Device</x:String>
+    <x:String x:Key="settings.extension.none">No extensions paired.</x:String>
+    <x:String x:Key="settings.extension.btn.approve">Approve</x:String>
+    <x:String x:Key="settings.extension.btn.reject">Reject</x:String>
+    <x:String x:Key="settings.extension.btn.unpair">Unpair</x:String>
+    <x:String x:Key="settings.extension.confirm.unpair">Unpair extension "{0}"?</x:String>
+    <x:String x:Key="settings.extension.hint">To get extensions please visit:</x:String>
+    <x:String x:Key="settings.extension.url">https://mypassword.puppylab.org/extension/</x:String>
+
+    <!-- Vault Locator Dialog -->
+    <x:String x:Key="locate.title">Locate Vault</x:String>
+    <x:String x:Key="locate.heading">Where is your vault?</x:String>
+    <x:String x:Key="locate.hint">MyPassword can keep your encrypted vault anywhere on disk (e.g. inside a OneDrive folder so it syncs automatically). Point it at an existing vault file or create a new one.</x:String>
+    <x:String x:Key="locate.btn.open">Open existing vault...</x:String>
+    <x:String x:Key="locate.btn.create">Create new vault...</x:String>
+    <x:String x:Key="locate.open.title">Select existing vault file</x:String>
+    <x:String x:Key="locate.create.title">Choose folder for new vault</x:String>
+    <x:String x:Key="locate.create.message">The new vault file will be created in this folder.</x:String>
+    <x:String x:Key="locate.file.filter">MyPassword vault (*.db)</x:String>
+    <x:String x:Key="locate.error.not_a_file">Selected path is not a regular file.</x:String>
+    <x:String x:Key="locate.error.already_exists">Cannot create vault file in the selected folder because there is an exist vault.</x:String>
+    <x:String x:Key="locate.error.pointer">Could not save vault location: {0}</x:String>
+    <x:String x:Key="locate.error.create">Could not create vault file: {0}</x:String>
+
+    <!-- Init Vault Dialog -->
+    <x:String x:Key="init.title">Set Master Password</x:String>
+    <x:String x:Key="init.heading">Create Master Password</x:String>
+    <x:String x:Key="init.hint">This password protects your vault. It cannot be recovered if lost.</x:String>
+    <x:String x:Key="init.password.placeholder">Password ({0}–{1} chars)</x:String>
+    <x:String x:Key="init.confirm.placeholder">Confirm password</x:String>
+    <x:String x:Key="init.btn.create">Init Vault</x:String>
+    <x:String x:Key="init.btn.cancel">Cancel</x:String>
+    <x:String x:Key="init.error.too_short">Password must be at least {0} characters.</x:String>
+    <x:String x:Key="init.error.mismatch">Passwords do not match.</x:String>
+
+    <!-- Unlock View -->
+    <x:String x:Key="unlock.hint">Enter your master password to unlock the vault.</x:String>
+    <x:String x:Key="unlock.password.placeholder">Master password (8–50 chars)</x:String>
+    <x:String x:Key="unlock.btn">Unlock</x:String>
+    <x:String x:Key="unlock.error.wrong_password">Incorrect password. Please try again.</x:String>
+    <x:String x:Key="unlock.oauth.hint">You can unlock the vault by OAuth if you forgot your password:</x:String>
+
+    <!-- Toolbar -->
+    <x:String x:Key="toolbar.btn.add_new">Add New</x:String>
+    <x:String x:Key="toolbar.search.placeholder">Search...</x:String>
+    <x:String x:Key="toolbar.btn.settings">Settings</x:String>
+    <x:String x:Key="toolbar.btn.lock">Lock</x:String>
+    <x:String x:Key="toolbar.menu.login">Login</x:String>
+    <x:String x:Key="toolbar.menu.note">Note</x:String>
+    <x:String x:Key="toolbar.menu.identity">Identity</x:String>
+
+    <!-- Categories -->
+    <x:String x:Key="category.all">All Items</x:String>
+    <x:String x:Key="category.favorites">Favorites</x:String>
+    <x:String x:Key="category.logins">Logins</x:String>
+    <x:String x:Key="category.notes">Notes</x:String>
+    <x:String x:Key="category.identities">Identities</x:String>
+    <x:String x:Key="category.trash">Trash</x:String>
+
+    <!-- Empty View -->
+    <x:String x:Key="empty.hint">Select an item from the list, or click "+ Add New".</x:String>
+
+    <!-- Detail View -->
+    <x:String x:Key="detail.btn.edit">Edit</x:String>
+    <x:String x:Key="detail.btn.delete">Delete</x:String>
+    <x:String x:Key="detail.btn.restore">Restore</x:String>
+    <x:String x:Key="detail.last_edit">Last edit on: {0}</x:String>
+
+    <!-- Edit View -->
+    <x:String x:Key="edit.btn.save">Save</x:String>
+    <x:String x:Key="edit.btn.cancel">Cancel</x:String>
+    <x:String x:Key="edit.btn.add_more">Add more</x:String>
+
+    <!-- Field Labels -->
+    <x:String x:Key="field.title">Title:</x:String>
+    <x:String x:Key="field.username">Username:</x:String>
+    <x:String x:Key="field.password">Password:</x:String>
+    <x:String x:Key="field.totp">TOTP 2FA:</x:String>
+    <x:String x:Key="field.passkey">Passkey:</x:String>
+    <x:String x:Key="field.websites">Websites:</x:String>
+    <x:String x:Key="field.memo">Memo:</x:String>
+    <x:String x:Key="field.content">Content:</x:String>
+    <x:String x:Key="field.name">Name:</x:String>
+    <x:String x:Key="field.email">Email:</x:String>
+    <x:String x:Key="field.passport">Passport:</x:String>
+    <x:String x:Key="field.id_number">ID Number:</x:String>
+    <x:String x:Key="field.tax_number">Tax Number:</x:String>
+    <x:String x:Key="field.mobiles">Mobiles:</x:String>
+    <x:String x:Key="field.telephones">Telephones:</x:String>
+    <x:String x:Key="field.address">Address:</x:String>
+    <x:String x:Key="field.zip_code">Zip Code:</x:String>
+
+    <!-- Password Generation -->
+    <x:String x:Key="password.gen.alpha_num">Word + Number</x:String>
+    <x:String x:Key="password.gen.alpha">Word Only</x:String>
+    <x:String x:Key="password.gen.num">Number Only</x:String>
+    <x:String x:Key="password.gen.symbol">Contains Symbol</x:String>
+    <x:String x:Key="password.gen.btn">Generate</x:String>
+
+    <!-- Password Actions -->
+    <x:String x:Key="password.btn.copy">Copy</x:String>
+    <x:String x:Key="password.menu.show">Show Password</x:String>
+    <x:String x:Key="password.menu.hide">Hide Password</x:String>
+    <x:String x:Key="password.menu.show_large">Show Large Password</x:String>
+    <x:String x:Key="password.dialog.title">Password</x:String>
+    <x:String x:Key="password.tip.copied">Copied to clipboard</x:String>
+
+    <!-- Passkey / TOTP -->
+    <x:String x:Key="passkey.btn.delete">Delete passkey</x:String>
+    <x:String x:Key="passkey.confirm.delete">Delete the passkey for "{0}"? This cannot be undone.</x:String>
+    <x:String x:Key="totp.btn.delete">Delete TOTP</x:String>
+    <x:String x:Key="totp.confirm.delete">Delete the TOTP for "{0}"? This cannot be undone.</x:String>
+
+    <!-- Confirm Dialogs -->
+    <x:String x:Key="confirm.title">Confirm</x:String>
+    <x:String x:Key="confirm.delete">Delete "{0}"?</x:String>
+    <x:String x:Key="unsaved.title">Unsaved Changes</x:String>
+    <x:String x:Key="unsaved.message">You have unsaved changes.</x:String>
+    <x:String x:Key="unsaved.btn.save">Save</x:String>
+    <x:String x:Key="unsaved.btn.discard">Discard</x:String>
+    <x:String x:Key="unsaved.btn.cancel">Cancel</x:String>
+
+    <!-- Pairing -->
+    <x:String x:Key="pair.title">Extension Pairing Request</x:String>
+    <x:String x:Key="pair.message">Extension "{0}" on device "{1}" is requesting to pair with this app.
+
+Do you want to approve?</x:String>
+
+    <!-- Common -->
+    <x:String x:Key="common.ok">OK</x:String>
+    <x:String x:Key="common.cancel">Cancel</x:String>
+</ResourceDictionary>

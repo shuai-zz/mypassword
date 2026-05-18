@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MyPasswordDesktop.Views.VaultLocatorWindow"
+        Width="480" SizeToContent="Height"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Title="{DynamicResource locate.title}">
+    <StackPanel Margin="24" Spacing="12">
+        <TextBlock Text="{DynamicResource locate.heading}" FontSize="18" FontWeight="Bold"
+                   HorizontalAlignment="Center" />
+        <TextBlock Text="{DynamicResource locate.hint}" Foreground="Gray"
+                   TextWrapping="Wrap" TextAlignment="Center" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12" Margin="0,8">
+            <Button x:Name="OpenButton" Content="{DynamicResource locate.btn.open}" Width="190" />
+            <Button x:Name="CreateButton" Content="{DynamicResource locate.btn.create}" Width="190" />
+        </StackPanel>
+        <TextBlock x:Name="ErrorText" Foreground="Red" TextWrapping="Wrap" TextAlignment="Center" />
+    </StackPanel>
+</Window>

@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MyPasswordDesktop.ViewModels"
+             x:Class="MyPasswordDesktop.Views.UnlockView"
+             x:DataType="vm:UnlockViewModel">
+    <Grid>
+        <StackPanel Width="420" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+                <Image Source="avares://MyPassword/Assets/icons/logo.png" Width="32" Height="32" />
+                <TextBlock Text="{DynamicResource app.name}" FontSize="22" FontWeight="Bold"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+
+            <TextBlock Text="{DynamicResource unlock.hint}" Foreground="Gray"
+                       TextWrapping="Wrap" TextAlignment="Center" />
+
+            <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
+                <TextBox Grid.Column="0" Text="{Binding Password}" PasswordChar="&#x2022;"
+                         PlaceholderText="{DynamicResource unlock.password.placeholder}"
+                         MaxLength="50" Margin="0,0,6,0" />
+                <Button Grid.Column="1" Content="{DynamicResource unlock.btn}"
+                        Command="{Binding UnlockCommand}" IsDefault="True" />
+            </Grid>
+
+            <TextBlock Text="{Binding ErrorMessage}" Foreground="Red"
+                       TextAlignment="Center" IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+            <StackPanel Spacing="6" IsVisible="{Binding HasOAuth}">
+                <TextBlock Text="{DynamicResource unlock.oauth.hint}" Foreground="Gray"
+                           TextWrapping="Wrap" TextAlignment="Center" Margin="0,8,0,0" />
+                <ItemsControl ItemsSource="{Binding OAuthRows}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:OAuthRowViewModel">
+                            <Grid ColumnDefinitions="100,*,Auto" Margin="0,3">
+                                <TextBlock Grid.Column="0" Text="{Binding DisplayProvider}"
+                                           VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Text="{Binding UserInfo}"
+                                           VerticalAlignment="Center" />
+                                <Button Grid.Column="2" Content="{DynamicResource settings.oauth.btn.login}"
+                                        Command="{Binding LoginCommand}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

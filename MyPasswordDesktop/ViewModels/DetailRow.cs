@@ -1,0 +1,80 @@
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using MyPasswordDesktop.Services;
+
+namespace MyPasswordDesktop.ViewModels
+{
+    /// <summary>One read-only field row in the detail view.</summary>
+    public sealed partial class DetailRow : ObservableObject
+    {
+        public const string KindText = "text";
+        public const string KindPassword = "password";
+        public const string KindMulti = "multi";
+        public const string KindTotp = "totp";
+
+        public string Label { get; }
+        public string Kind { get; }
+
+        public ObservableCollection<string> Values { get; } = new();
+
+        [ObservableProperty]
+        private string _value;
+
+        [ObservableProperty]
+        private bool _revealed;
+
+        private readonly string _plain;
+
+        public DetailRow(string label, string kind, string value)
+        {
+            Label = label;
+            Kind = kind;
+            _plain = value ?? "";
+            _value = kind == KindPassword ? Mask(_plain) : _plain;
+        }
+
+        public DetailRow(string label, System.Collections.Generic.IEnumerable<string> values)
+        {
+            Label = label;
+            Kind = KindMulti;
+            if (values != null)
+            {
+                foreach (string v in values)
+                {
+                    Values.Add(v);
+                }
+            }
+            if (Values.Count == 0)
+            {
+                Values.Add("");
+            }
+        }
+
+        public bool IsText => Kind == KindText;
+        public bool IsPassword => Kind == KindPassword;
+        public bool IsMulti => Kind == KindMulti;
+        public bool IsTotp => Kind == KindTotp;
+        public bool CanCopy => Kind is KindPassword or KindTotp || (Kind == KindText && !string.IsNullOrEmpty(_plain));
+
+        private static string Mask(string s) => string.IsNullOrEmpty(s) ? "" : new string('•', 8);
+
+        [RelayCommand]
+        private void ToggleReveal()
+        {
+            if (!IsPassword)
+            {
+                return;
+            }
+            Revealed = !Revealed;
+            Value = Revealed ? _plain : Mask(_plain);
+        }
+
+        [RelayCommand]
+        private void Copy()
+        {
+            ClipboardService.Instance.Copy(IsPassword ? _plain : Value);
+        }
+    }
+}
