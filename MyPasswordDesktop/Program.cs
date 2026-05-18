@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Avalonia;
 using MyPasswordDesktop.Core;
 using MyPasswordDesktop.Util;
@@ -15,6 +16,21 @@ namespace MyPasswordDesktop
         [STAThread]
         public static void Main(string[] args)
         {
+            // ── crash logging ────────────────────────────────────────────────
+            // Capture unhandled exceptions on every thread and write them to the
+            // log file before the process dies. Without this, a failure during
+            // Avalonia/XAML startup (notably under Native AOT) exits silently.
+            AppDomain.CurrentDomain.UnhandledException += (_, e) =>
+            {
+                Log.Error("FATAL: unhandled exception", e.ExceptionObject as Exception);
+                Log.Flush();
+            };
+            TaskScheduler.UnobservedTaskException += (_, e) =>
+            {
+                Log.Error("FATAL: unobserved task exception", e.Exception);
+                e.SetObserved();
+            };
+
             // ── bind the daemon port up-front ────────────────────────────────
             // Mirrors the Java MainWindow: claim 127.0.0.1:27432 before showing
             // any UI. If the port is taken, another MyPassword instance is
@@ -36,6 +52,11 @@ namespace MyPasswordDesktop
             try
             {
                 BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("FATAL: application terminated by an unhandled exception", ex);
+                Log.Flush();
             }
             finally
             {

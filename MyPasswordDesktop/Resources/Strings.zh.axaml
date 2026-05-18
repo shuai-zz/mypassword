@@ -1,6 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!-- MyPassword i18n — 中文 (Simplified Chinese). -->
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="MyPasswordDesktop.Resources.StringsZh">
+    <!-- MyPassword i18n — 中文 (Simplified Chinese).
+         x:Class + code-behind => compiled XAML, so it loads under Native AOT. -->
 
     <!-- App -->
     <x:String x:Key="app.name">MyPassword</x:String>
@@ -18,7 +20,7 @@
     <x:String x:Key="settings.tab.password">密码</x:String>
     <x:String x:Key="settings.tab.extension">扩展</x:String>
     <x:String x:Key="settings.keep_tray_icon">在通知区域中保留 MyPassword。</x:String>
-    <x:String x:Key="settings.language">语言：(重启 MyPassword 后生效)</x:String>
+    <x:String x:Key="settings.language">语言：(重启后生效)</x:String>
     <x:String x:Key="settings.language.system">系统默认</x:String>
     <x:String x:Key="settings.language.name.en">English</x:String>
     <x:String x:Key="settings.language.name.zh">中文</x:String>

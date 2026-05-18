@@ -80,6 +80,9 @@ namespace MyPasswordDesktop.Util
 
         public static void Error(string message, Exception ex = null, [CallerFilePath] string file = null)
             => LoggerFor(file).LogError(ex, "{LogText}", message);
+
+        /// <summary>Flush buffered log entries — call before a crash exit.</summary>
+        public static void Flush() => Serilog.Log.CloseAndFlush();
     }
 
     /// <summary>

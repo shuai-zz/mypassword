@@ -1,8 +1,6 @@
-using System;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using MyPasswordDesktop.Util;
 
 namespace MyPasswordDesktop.I18n
@@ -12,6 +10,11 @@ namespace MyPasswordDesktop.I18n
     /// mechanism with Avalonia <c>.axaml</c> resource dictionaries
     /// (<c>Resources/Strings.{lang}.axaml</c>) merged into the application
     /// resources, so XAML can bind via <c>{DynamicResource key}</c>.
+    /// <para>
+    /// The dictionaries carry <c>x:Class</c> and are instantiated directly
+    /// (<c>new StringsEn()</c>), which runs their <em>compiled</em> XAML — this
+    /// is trim- and Native-AOT-safe, unlike loading them by URI at runtime.
+    /// </para>
     /// </summary>
     public static class I18n
     {
@@ -25,8 +28,12 @@ namespace MyPasswordDesktop.I18n
         {
             string lang = ResolveLang(language);
             Log.Info("init locale: " + lang);
-            var uri = new Uri($"avares://MyPassword/Resources/Strings.{lang}.axaml");
-            var dict = (ResourceDictionary)AvaloniaXamlLoader.Load(uri);
+
+            ResourceDictionary dict = lang switch
+            {
+                "zh" => new MyPasswordDesktop.Resources.StringsZh(),
+                _ => new MyPasswordDesktop.Resources.StringsEn(),
+            };
 
             var appResources = Application.Current?.Resources;
             if (appResources == null)

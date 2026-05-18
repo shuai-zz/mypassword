@@ -1,6 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!-- MyPassword i18n — English (default). Converted from messages.properties. -->
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="MyPasswordDesktop.Resources.StringsEn">
+    <!-- MyPassword i18n — English (default). Converted from messages.properties.
+         x:Class + code-behind => compiled XAML, so it loads under Native AOT. -->
 
     <!-- App -->
     <x:String x:Key="app.name">MyPassword</x:String>

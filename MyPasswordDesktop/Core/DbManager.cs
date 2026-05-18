@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Data.Sqlite;
 using MyPasswordDesktop.Core.Entities;
 using MyPasswordDesktop.Util;
+using Members = System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 
 namespace MyPasswordDesktop.Core
 {
@@ -14,6 +16,11 @@ namespace MyPasswordDesktop.Core
     /// Lightweight reflection ORM over SQLite (Microsoft.Data.Sqlite) — the C#
     /// port of the Java JDBC <c>DbManager</c>. Entity class name = table name,
     /// property names = column names.
+    /// <para>
+    /// Entity type parameters carry <see cref="DynamicallyAccessedMembersAttribute"/>
+    /// so the trimmer / Native AOT keeps every entity's public properties — the
+    /// ORM reflects over them at runtime.
+    /// </para>
     /// </summary>
     public sealed class DbManager
     {
@@ -133,10 +140,12 @@ namespace MyPasswordDesktop.Core
 
         // ── queries ─────────────────────────────────────────────────────────
 
-        public T QueryFirst<T>(string where, params object[] args) where T : new()
+        public T QueryFirst<[DynamicallyAccessedMembers(Members.PublicProperties)] T>(
+            string where, params object[] args) where T : new()
             => QueryForObject<T>(true, where, args);
 
-        public T QueryUnique<T>(string where, params object[] args) where T : new()
+        public T QueryUnique<[DynamicallyAccessedMembers(Members.PublicProperties)] T>(
+            string where, params object[] args) where T : new()
         {
             T obj = QueryForObject<T>(false, where, args);
             if (obj == null)
@@ -146,7 +155,8 @@ namespace MyPasswordDesktop.Core
             return obj;
         }
 
-        private T QueryForObject<T>(bool allowMultipleResults, string where, object[] args) where T : new()
+        private T QueryForObject<[DynamicallyAccessedMembers(Members.PublicProperties)] T>(
+            bool allowMultipleResults, string where, object[] args) where T : new()
         {
             lock (_gate)
             {
@@ -167,7 +177,8 @@ namespace MyPasswordDesktop.Core
             }
         }
 
-        public List<T> QueryForList<T>(string where, params object[] args) where T : new()
+        public List<T> QueryForList<[DynamicallyAccessedMembers(Members.PublicProperties)] T>(
+            string where, params object[] args) where T : new()
         {
             lock (_gate)
             {
@@ -186,11 +197,11 @@ namespace MyPasswordDesktop.Core
 
         // ── mutations ───────────────────────────────────────────────────────
 
-        public void Insert(object obj)
+        public void Insert<[DynamicallyAccessedMembers(Members.PublicProperties)] T>(T obj)
         {
             lock (_gate)
             {
-                Mapping mapping = GetMapping(obj.GetType());
+                Mapping mapping = GetMapping(typeof(T));
                 Log.Info("insert: " + mapping.InsertSql);
                 var args = new object[mapping.InsertFields.Count];
                 for (int i = 0; i < args.Length; i++)
@@ -202,23 +213,24 @@ namespace MyPasswordDesktop.Core
             }
         }
 
-        public void Delete(object obj)
+        public void Delete<[DynamicallyAccessedMembers(Members.PublicProperties)] T>(T obj)
         {
             lock (_gate)
             {
-                Mapping mapping = GetMapping(obj.GetType());
-                string sql = $"DELETE FROM {obj.GetType().Name} WHERE {mapping.IdField.Name} = ?";
+                Mapping mapping = GetMapping(typeof(T));
+                string sql = $"DELETE FROM {typeof(T).Name} WHERE {mapping.IdField.Name} = ?";
                 Execute(sql, mapping.IdField.GetValue(obj));
             }
         }
 
-        public void Update(object obj, params string[] fields)
+        public void Update<[DynamicallyAccessedMembers(Members.PublicProperties)] T>(
+            T obj, params string[] fields)
         {
             lock (_gate)
             {
-                Mapping mapping = GetMapping(obj.GetType());
+                Mapping mapping = GetMapping(typeof(T));
                 var sb = new StringBuilder(128);
-                sb.Append("UPDATE ").Append(obj.GetType().Name).Append(" SET ");
+                sb.Append("UPDATE ").Append(typeof(T).Name).Append(" SET ");
                 var values = new object[fields.Length + 1];
                 for (int i = 0; i < fields.Length; i++)
                 {
@@ -323,7 +335,8 @@ namespace MyPasswordDesktop.Core
             return cmd;
         }
 
-        private T CreateObject<T>(SqliteDataReader rs) where T : new()
+        private T CreateObject<[DynamicallyAccessedMembers(Members.PublicProperties)] T>(SqliteDataReader rs)
+            where T : new()
         {
             T obj = new();
             Mapping mapping = GetMapping(typeof(T));
@@ -362,7 +375,7 @@ namespace MyPasswordDesktop.Core
             return obj;
         }
 
-        private Mapping GetMapping(Type clazz)
+        private Mapping GetMapping([DynamicallyAccessedMembers(Members.PublicProperties)] Type clazz)
         {
             if (!_ormMappings.TryGetValue(clazz, out Mapping mapping))
             {
@@ -381,7 +394,7 @@ namespace MyPasswordDesktop.Core
         public readonly Dictionary<string, PropertyInfo> Fields = new();
         public readonly string InsertSql;
 
-        public Mapping(Type clazz)
+        public Mapping([DynamicallyAccessedMembers(Members.PublicProperties)] Type clazz)
         {
             foreach (PropertyInfo p in clazz.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {

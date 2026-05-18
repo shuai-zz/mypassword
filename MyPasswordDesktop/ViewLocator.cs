@@ -2,38 +2,27 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using MyPasswordDesktop.ViewModels;
-using System;
-using System.Diagnostics.CodeAnalysis;
+using MyPasswordDesktop.Views;
 
 namespace MyPasswordDesktop
 {
     /// <summary>
-    /// Given a view model, returns the corresponding view if possible.
+    /// Maps a view model to its view. Uses an explicit switch (no reflection /
+    /// <c>Activator.CreateInstance</c>) so it is trim- and Native-AOT-safe.
     /// </summary>
-    [RequiresUnreferencedCode(
-        "Default implementation of ViewLocator involves reflection which may be trimmed away.",
-        Url = "https://docs.avaloniaui.net/docs/concepts/view-locator")]
     public class ViewLocator : IDataTemplate
     {
-        public Control? Build(object? param)
+        public Control? Build(object? param) => param switch
         {
-            if (param is null)
-                return null;
+            UnlockViewModel => new UnlockView(),
+            MainContentViewModel => new MainContentView(),
+            ItemDetailViewModel => new ItemDetailView(),
+            ItemEditViewModel => new ItemEditView(),
+            EmptyViewModel => new EmptyView(),
+            null => null,
+            _ => new TextBlock { Text = "Not Found: " + param.GetType().FullName },
+        };
 
-            var name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-            var type = Type.GetType(name);
-
-            if (type != null)
-            {
-                return (Control)Activator.CreateInstance(type)!;
-            }
-
-            return new TextBlock { Text = "Not Found: " + name };
-        }
-
-        public bool Match(object? data)
-        {
-            return data is ViewModelBase;
-        }
+        public bool Match(object? data) => data is ViewModelBase;
     }
 }
