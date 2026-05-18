@@ -40,6 +40,11 @@ namespace MyPasswordDesktop.Core
 
         public string GetSetting(string key, string defaultValue)
         {
+            // the vault may already be closed during app shutdown
+            if (_dbManager == null)
+            {
+                return defaultValue;
+            }
             VaultSetting vs = _dbManager.QueryFirst<VaultSetting>("where setting_key = ?", key);
             return vs?.setting_value ?? defaultValue;
         }
@@ -398,9 +403,10 @@ namespace MyPasswordDesktop.Core
             EncryptDEK(newPassword, dek);
         }
 
+        /// <summary>Close the vault. Idempotent — safe to call more than once.</summary>
         public void Close()
         {
-            _dbManager.Close();
+            _dbManager?.Close();
             _dbManager = null;
         }
     }

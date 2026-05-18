@@ -20,8 +20,10 @@ namespace MyPasswordDesktop.Views
     {
         private HttpDaemon _daemon;
         private TrayIcon _trayIcon;
+        private SettingsWindow _settingsWindow;
         private bool _bootstrapped;
         private bool _exiting;
+        private bool _teardownDone;
 
         public MainWindow()
         {
@@ -44,7 +46,7 @@ namespace MyPasswordDesktop.Views
             catch (Exception ex)
             {
                 Log.Error("bootstrap failed", ex);
-                Shutdown();
+                ExitApp();
             }
         }
 
@@ -59,7 +61,7 @@ namespace MyPasswordDesktop.Views
                 bool located = await new VaultLocatorWindow().ShowDialog<bool>(this);
                 if (!located)
                 {
-                    Shutdown();
+                    ExitApp();
                     return;
                 }
             }
@@ -82,7 +84,7 @@ namespace MyPasswordDesktop.Views
                 bool initialized = await new InitVaultWindow().ShowDialog<bool>(this);
                 if (!initialized)
                 {
-                    Shutdown();
+                    ExitApp();
                     return;
                 }
             }
@@ -122,7 +124,7 @@ namespace MyPasswordDesktop.Views
             var settings = new NativeMenuItem(I18n.I18n.T("tray.settings"));
             settings.Click += (_, _) => OpenSettings();
             var exit = new NativeMenuItem(I18n.I18n.T("tray.exit"));
-            exit.Click += (_, _) => { _exiting = true; Shutdown(); };
+            exit.Click += (_, _) => ExitApp();
 
             menu.Add(open);
             menu.Add(lockItem);
@@ -175,32 +177,64 @@ namespace MyPasswordDesktop.Views
 
         private void OpenSettings()
         {
-            var win = new SettingsWindow();
-            win.Show(this);
+            // a settings dialog is already open — activate it instead of
+            // opening a duplicate.
+            if (_settingsWindow != null)
+            {
+                if (_settingsWindow.WindowState == WindowState.Minimized)
+                {
+                    _settingsWindow.WindowState = WindowState.Normal;
+                }
+                _settingsWindow.Activate();
+                return;
+            }
+            _settingsWindow = new SettingsWindow();
+            _settingsWindow.Closed += (_, _) => _settingsWindow = null;
+            _settingsWindow.Show(this);
         }
 
         // ── lifecycle ────────────────────────────────────────────────────────
 
         private void OnClosing(object sender, WindowClosingEventArgs e)
         {
-            bool keepInTray = VaultManager.Current != null
-                              && VaultManager.Current.GetSetting(SettingKey.KEEP_TRAY_ICON, 1) != 0;
-            if (keepInTray && !_exiting)
+            // desktop.Shutdown() below closes this window again, re-entering
+            // OnClosing — let that pass straight through to avoid recursion.
+            if (_teardownDone)
             {
-                e.Cancel = true;
-                Hide();
                 return;
             }
-            _daemon?.Stop();
-        }
-
-        private void Shutdown()
-        {
+            if (!_exiting)
+            {
+                // a plain window close keeps the app alive in the tray unless
+                // the user disabled that setting.
+                bool keepInTray = VaultManager.Current != null
+                                  && VaultManager.Current.GetSetting(SettingKey.KEEP_TRAY_ICON, 1) != 0;
+                if (keepInTray)
+                {
+                    e.Cancel = true;
+                    Hide();
+                    return;
+                }
+                _exiting = true;
+            }
+            // really exiting — tear down the daemon (closes the vault) then
+            // shut the application down.
+            _teardownDone = true;
             _daemon?.Stop();
             if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.Shutdown();
             }
+        }
+
+        /// <summary>
+        /// Exit the whole application. Routes through <see cref="OnClosing"/> so
+        /// teardown happens exactly once, in one place.
+        /// </summary>
+        private void ExitApp()
+        {
+            _exiting = true;
+            Close();
         }
     }
 }

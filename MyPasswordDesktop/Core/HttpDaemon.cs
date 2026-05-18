@@ -24,6 +24,7 @@ namespace MyPasswordDesktop.Core
 
         private RequestController _controller;
         private HttpListener _listener;
+        private bool _stopped;
 
         public void InitDispatcher()
         {
@@ -38,8 +39,14 @@ namespace MyPasswordDesktop.Core
             _ = Task.Run(AcceptLoopAsync);
         }
 
+        /// <summary>Stop the daemon and close the vault. Idempotent.</summary>
         public void Stop()
         {
+            if (_stopped)
+            {
+                return;
+            }
+            _stopped = true;
             try { _listener?.Stop(); } catch { /* ignore */ }
             VaultManager.Current?.Close();
         }
