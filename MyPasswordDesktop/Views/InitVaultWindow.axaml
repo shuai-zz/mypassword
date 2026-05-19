@@ -1,5 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:MyPasswordDesktop.Controls"
         x:Class="MyPasswordDesktop.Views.InitVaultWindow"
         Width="420" SizeToContent="Height"
         CanResize="False"
@@ -11,9 +12,11 @@
                    HorizontalAlignment="Center" />
         <TextBlock Text="{DynamicResource init.hint}" Foreground="Gray"
                    TextWrapping="Wrap" TextAlignment="Center" />
-        <TextBox x:Name="PasswordBox" PasswordChar="&#x2022;" MaxLength="50" Margin="0,8,0,0" />
+        <TextBox x:Name="PasswordBox" PasswordChar="&#x2022;" MaxLength="50" Margin="0,8,0,0"
+                 controls:PasswordReveal.Enabled="True" />
         <TextBox x:Name="ConfirmBox" PasswordChar="&#x2022;" MaxLength="50"
-                 PlaceholderText="{DynamicResource init.confirm.placeholder}" />
+                 PlaceholderText="{DynamicResource init.confirm.placeholder}"
+                 controls:PasswordReveal.Enabled="True" />
         <TextBlock x:Name="ErrorText" Foreground="Red" TextWrapping="Wrap" TextAlignment="Center" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12" Margin="0,4">
             <Button x:Name="CreateButton" Content="{DynamicResource init.btn.create}" Width="130"

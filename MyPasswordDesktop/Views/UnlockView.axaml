@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:MyPasswordDesktop.ViewModels"
+             xmlns:controls="using:MyPasswordDesktop.Controls"
              x:Class="MyPasswordDesktop.Views.UnlockView"
              x:DataType="vm:UnlockViewModel">
     <Grid>
@@ -18,7 +19,8 @@
             <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
                 <TextBox Grid.Column="0" Text="{Binding Password}" PasswordChar="&#x2022;"
                          PlaceholderText="{DynamicResource unlock.password.placeholder}"
-                         MaxLength="50" Margin="0,0,6,0" />
+                         MaxLength="50" Margin="0,0,6,0"
+                         controls:PasswordReveal.Enabled="True" />
                 <Button Grid.Column="1" Content="{DynamicResource unlock.btn}"
                         Command="{Binding UnlockCommand}" IsDefault="True" />
             </Grid>

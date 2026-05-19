@@ -112,9 +112,6 @@ namespace MyPasswordDesktop.ViewModels
         }
 
         [RelayCommand]
-        private void ToggleReveal() => PasswordRevealed = !PasswordRevealed;
-
-        [RelayCommand]
         private void RemoveSelf()
         {
             Present = false;

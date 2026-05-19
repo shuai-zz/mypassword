@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:MyPasswordDesktop.ViewModels"
+             xmlns:controls="using:MyPasswordDesktop.Controls"
              x:Class="MyPasswordDesktop.Views.ItemEditView"
              x:DataType="vm:ItemEditViewModel">
     <Grid RowDefinitions="Auto,Auto,*" Margin="10">
@@ -27,12 +28,11 @@
                                 <TextBox Text="{Binding Value}" IsVisible="{Binding IsArea}"
                                          AcceptsReturn="True" TextWrapping="Wrap" Height="80" />
                                 <!-- password -->
-                                <Grid ColumnDefinitions="*,Auto,Auto" IsVisible="{Binding IsPassword}">
+                                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding IsPassword}">
                                     <TextBox Grid.Column="0" Text="{Binding Value}" PasswordChar="&#x2022;"
-                                             RevealPassword="{Binding PasswordRevealed}" />
-                                    <Button Grid.Column="1" Content="&#x1F441;" Margin="6,0,0,0"
-                                            Command="{Binding ToggleRevealCommand}" />
-                                    <Button Grid.Column="2" Content="{DynamicResource password.gen.btn}"
+                                             RevealPassword="{Binding PasswordRevealed, Mode=TwoWay}"
+                                             controls:PasswordReveal.Enabled="True" />
+                                    <Button Grid.Column="1" Content="{DynamicResource password.gen.btn}"
                                             Margin="6,0,0,0" Command="{Binding GenerateCommand}" />
                                 </Grid>
                                 <!-- multi values -->

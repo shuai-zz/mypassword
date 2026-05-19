@@ -1,5 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:MyPasswordDesktop.Controls"
         x:Class="MyPasswordDesktop.Views.SettingsWindow"
         Width="580" Height="540"
         CanResize="False"
@@ -49,17 +50,20 @@
                     <Grid ColumnDefinitions="*,240" x:Name="CurrentRow">
                         <TextBlock Grid.Column="0" Text="{DynamicResource settings.password.current}"
                                    VerticalAlignment="Center" />
-                        <TextBox Grid.Column="1" x:Name="CurrentPwBox" PasswordChar="&#x2022;" MaxLength="50" />
+                        <TextBox Grid.Column="1" x:Name="CurrentPwBox" PasswordChar="&#x2022;" MaxLength="50"
+                                 controls:PasswordReveal.Enabled="True" />
                     </Grid>
                     <Grid ColumnDefinitions="*,240">
                         <TextBlock Grid.Column="0" Text="{DynamicResource settings.password.new}"
                                    VerticalAlignment="Center" />
-                        <TextBox Grid.Column="1" x:Name="NewPwBox" PasswordChar="&#x2022;" MaxLength="50" />
+                        <TextBox Grid.Column="1" x:Name="NewPwBox" PasswordChar="&#x2022;" MaxLength="50"
+                                 controls:PasswordReveal.Enabled="True" />
                     </Grid>
                     <Grid ColumnDefinitions="*,240">
                         <TextBlock Grid.Column="0" Text="{DynamicResource settings.password.confirm}"
                                    VerticalAlignment="Center" />
-                        <TextBox Grid.Column="1" x:Name="ConfirmPwBox" PasswordChar="&#x2022;" MaxLength="50" />
+                        <TextBox Grid.Column="1" x:Name="ConfirmPwBox" PasswordChar="&#x2022;" MaxLength="50"
+                                 controls:PasswordReveal.Enabled="True" />
                     </Grid>
                     <TextBlock x:Name="PwMessage" />
                     <Button x:Name="ChangePwButton" Content="{DynamicResource settings.password.btn.change}"
