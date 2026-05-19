@@ -9,6 +9,10 @@ namespace MyPasswordDesktop.Util
         /// <summary>Name of the pointer file inside <see cref="GetAppDataDir"/>.</summary>
         private const string VaultPointer = "vault.path";
 
+        /// <summary>UTF-8 without a byte-order mark — the Java app reads the
+        /// pointer file with <c>Files.readString</c>, which does not strip a BOM.</summary>
+        private static readonly Encoding Utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+
         public static string GetUserHome()
             => Path.GetFullPath(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
 
@@ -67,7 +71,7 @@ namespace MyPasswordDesktop.Util
                 if (File.Exists(pointer)) File.Delete(pointer);
                 return;
             }
-            File.WriteAllText(pointer, Path.GetFullPath(target), Encoding.UTF8);
+            File.WriteAllText(pointer, Path.GetFullPath(target), Utf8NoBom);
         }
     }
 }
