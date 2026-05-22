@@ -2,26 +2,19 @@
 
 Open source desktop password manager.
 
-## How to build
+- Website & documentation: <https://mypassword.puppylab.org>
+- Download: <https://github.com/michaelliao/mypassword/releases/latest>
 
-### Desktop app (Maven)
+## Features
 
-Run from the `desktop/` directory:
+- Local-first vault — all data stays on your machine, encrypted at rest.
+- Manage logins, secure notes, and identities, with favorites and trash.
+- Auto-lock after inactivity to protect the in-memory encryption key.
+- Chrome extension integration via a local HTTP endpoint (`http://127.0.0.1:27432`).
+- Cross-platform native packages for Windows, macOS, and Linux.
 
-```bash
-cd desktop
-mvn package
-```
+## License
 
-The active `jpackage` profile (`win64`, `macos-arm64`, `linux64`) is selected automatically from the host OS and produces a native installer / app image under `desktop/target/`.
+Released under the [GNU General Public License v3.0](LICENSE).
 
-### Chrome extension (zip)
-
-Package the unpacked extension into a zip for distribution / upload:
-
-```bash
-cd extension/chrome
-zip -r ../mypassword-chrome.zip . -x "*.DS_Store"
-```
-
-The resulting `extension/mypassword-chrome.zip` can be loaded into Chrome via *Load unpacked* (after unzipping) or uploaded to the Chrome Web Store.
+**No warranty.** This software is provided "as is", without warranty of any kind, express or implied. The authors and copyright holders make **no guarantee** regarding its security, reliability, or fitness for any particular purpose, and accept no liability for any data loss or damage arising from its use. Use it at your own risk.
