@@ -8,6 +8,19 @@
         <Style Selector="TextBlock.totpWarn">
             <Setter Property="Foreground" Value="#E04F4F" />
         </Style>
+        <!-- text-only button used to render website URLs as hyperlinks -->
+        <Style Selector="Button.link">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Foreground" Value="#5C8DEF" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="Button.link:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+        </Style>
     </UserControl.Styles>
     <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="10">
 
@@ -62,6 +75,15 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate x:DataType="x:String">
                                             <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <!-- websites: list of clickable links -->
+                                <ItemsControl ItemsSource="{Binding Values}" IsVisible="{Binding IsWebsites}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="x:String">
+                                            <Button Classes="link" Content="{Binding}"
+                                                    Click="OpenWebsite_Click" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

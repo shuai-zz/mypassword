@@ -69,7 +69,7 @@ namespace MyPasswordDesktop.ViewModels
             {
                 Rows.Add(new DetailRow(I18n.I18n.T("field.passkey"), DetailRow.KindText, FormatPasskey(d.passkey)));
             }
-            Rows.Add(new DetailRow(I18n.I18n.T("field.websites"), d.websites));
+            Rows.Add(new DetailRow(I18n.I18n.T("field.websites"), d.websites, DetailRow.KindWebsites));
             Rows.Add(new DetailRow(I18n.I18n.T("field.memo"), DetailRow.KindText, StringUtils.Normalize(d.memo)));
         }
 

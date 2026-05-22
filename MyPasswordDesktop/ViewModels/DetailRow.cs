@@ -14,6 +14,7 @@ namespace MyPasswordDesktop.ViewModels
         public const string KindPassword = "password";
         public const string KindMulti = "multi";
         public const string KindTotp = "totp";
+        public const string KindWebsites = "websites";
 
         public string Label { get; }
         public string Kind { get; }
@@ -50,10 +51,10 @@ namespace MyPasswordDesktop.ViewModels
             _canCopy = canCopy;
         }
 
-        public DetailRow(string label, System.Collections.Generic.IEnumerable<string> values)
+        public DetailRow(string label, System.Collections.Generic.IEnumerable<string> values, string kind = KindMulti)
         {
             Label = label;
-            Kind = KindMulti;
+            Kind = kind;
             if (values != null)
             {
                 foreach (string v in values)
@@ -71,6 +72,7 @@ namespace MyPasswordDesktop.ViewModels
         public bool IsPassword => Kind == KindPassword;
         public bool IsMulti => Kind == KindMulti;
         public bool IsTotp => Kind == KindTotp;
+        public bool IsWebsites => Kind == KindWebsites;
         public bool CanCopy => _canCopy && Kind == KindText && !string.IsNullOrEmpty(_plain);
 
         private static string Mask(string s) => string.IsNullOrEmpty(s) ? "" : new string('•', 8);
