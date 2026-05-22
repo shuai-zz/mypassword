@@ -39,13 +39,15 @@ namespace MyPasswordDesktop.ViewModels
         private bool _totpWarning;
 
         private readonly string _plain;
+        private readonly bool _canCopy;
 
-        public DetailRow(string label, string kind, string value)
+        public DetailRow(string label, string kind, string value, bool canCopy = true)
         {
             Label = label;
             Kind = kind;
             _plain = value ?? "";
             _value = kind == KindPassword ? Mask(_plain) : _plain;
+            _canCopy = canCopy;
         }
 
         public DetailRow(string label, System.Collections.Generic.IEnumerable<string> values)
@@ -69,7 +71,7 @@ namespace MyPasswordDesktop.ViewModels
         public bool IsPassword => Kind == KindPassword;
         public bool IsMulti => Kind == KindMulti;
         public bool IsTotp => Kind == KindTotp;
-        public bool CanCopy => Kind is KindPassword or KindTotp || (Kind == KindText && !string.IsNullOrEmpty(_plain));
+        public bool CanCopy => _canCopy && (Kind is KindPassword or KindTotp || (Kind == KindText && !string.IsNullOrEmpty(_plain)));
 
         private static string Mask(string s) => string.IsNullOrEmpty(s) ? "" : new string('•', 8);
 

@@ -56,7 +56,7 @@ namespace MyPasswordDesktop.ViewModels
         private void BuildLogin(LoginItemData login)
         {
             LoginFieldsData d = login.data ?? new LoginFieldsData();
-            Rows.Add(new DetailRow(I18n.I18n.T("field.title"), DetailRow.KindText, StringUtils.Normalize(d.title)));
+            Rows.Add(new DetailRow(I18n.I18n.T("field.title"), DetailRow.KindText, StringUtils.Normalize(d.title), canCopy: false));
             Rows.Add(new DetailRow(I18n.I18n.T("field.username"), DetailRow.KindText, StringUtils.Normalize(d.username)));
             Rows.Add(new DetailRow(I18n.I18n.T("field.password"), DetailRow.KindPassword, d.password ?? ""));
             if (d.totp != null)
@@ -76,7 +76,7 @@ namespace MyPasswordDesktop.ViewModels
         private void BuildNote(NoteItemData note)
         {
             NoteFieldsData d = note.data ?? new NoteFieldsData();
-            Rows.Add(new DetailRow(I18n.I18n.T("field.title"), DetailRow.KindText, StringUtils.Normalize(d.title)));
+            Rows.Add(new DetailRow(I18n.I18n.T("field.title"), DetailRow.KindText, StringUtils.Normalize(d.title), canCopy: false));
             Rows.Add(new DetailRow(I18n.I18n.T("field.content"), DetailRow.KindText, StringUtils.Normalize(d.content)));
         }
 
