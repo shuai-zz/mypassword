@@ -11,31 +11,41 @@ jobs:
       matrix:
         include:
           - os: windows-latest
+            rid: win-x64
             artifact: MyPassword-windows
           - os: macos-latest
+            rid: osx-arm64
             artifact: MyPassword-macos-arm64
           - os: macos-26-intel
+            rid: osx-x64
             artifact: MyPassword-macos-x64
           - os: ubuntu-latest
+            rid: linux-x64
             artifact: MyPassword-linux
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-dotnet@v4
         with:
-          distribution: temurin
-          java-version: 25
-          cache: maven
-      - run: mvn -B clean package
-        working-directory: desktop
-      - name: Zip app-image (Unix)
+          dotnet-version: '10.0.x'
+      - name: Publish (Native AOT, self-contained)
+        run: dotnet publish MyPasswordDesktop/MyPasswordDesktop.csproj -c Release -r ${{ matrix.rid }} --self-contained true -o publish
+      - name: Strip debug symbols (Unix)
         if: runner.os != 'Windows'
-        run: cd desktop/target/dist && zip -r ../../../${{ matrix.artifact }}.zip */
         shell: bash
-      - name: Zip app-image (Windows)
+        run: find publish -type f -name "*.pdb" -delete
+      - name: Strip debug symbols (Windows)
         if: runner.os == 'Windows'
-        run: Compress-Archive -Path desktop/target/dist/* -DestinationPath ${{ matrix.artifact }}.zip
         shell: pwsh
+        run: Get-ChildItem publish -Recurse -Filter *.pdb | Remove-Item -Force
+      - name: Zip publish (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: cd publish && zip -r ../${{ matrix.artifact }}.zip .
+      - name: Zip publish (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: Compress-Archive -Path publish\* -DestinationPath ${{ matrix.artifact }}.zip
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
