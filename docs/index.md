@@ -49,14 +49,16 @@ Your master password derives a key that unwraps the Data Encryption Key (DEK). T
 
 ## Requirements
 
-- Java 25 or later (bundled in the release package)
+- A modern desktop OS (Windows 10+, macOS 12+, or a recent Linux). The release is shipped as a self-contained Native AOT binary — no runtime install required.
 - Chrome browser (for the extension)
 
 ## Build from Source
 
+The desktop app is a C#/.NET project compiled with Native AOT. From the repository root:
+
 ```bash
-cd desktop
-mvn clean package
+dotnet publish MyPasswordDesktop/MyPasswordDesktop.csproj \
+    -c Release -r <rid> --self-contained true -o publish
 ```
 
-The app image is output to `desktop/target/dist/`.
+Replace `<rid>` with your target runtime: `win-x64`, `osx-arm64`, `osx-x64`, or `linux-x64`. The standalone binary is written to `publish/`.

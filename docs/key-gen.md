@@ -14,7 +14,7 @@ MyPassword uses a two-layer encryption architecture. A random **Data Encryption 
 
 ## DEK Generation
 
-A 256-bit DEK is generated using `java.security.SecureRandom` when the vault is first created. This key is never stored in plaintext — it is always wrapped by a derived key.
+A 256-bit DEK is generated using a cryptographically secure random number generator (.NET's `System.Security.Cryptography.RandomNumberGenerator`) when the vault is first created. This key is never stored in plaintext — it is always wrapped by a derived key.
 
 ## Master Password Path
 
@@ -198,7 +198,7 @@ If OAuth recovery is enabled and the attacker gains control of the linked Google
 
 ### 3. Memory Dump While Unlocked
 
-While the vault is unlocked, the DEK is held in plaintext in JVM heap memory. An attacker with local access (e.g. malware, physical access to an unlocked machine) could dump the process memory and extract the DEK.
+While the vault is unlocked, the DEK is held in plaintext in process memory. An attacker with local access (e.g. malware, physical access to an unlocked machine) could dump the process memory and extract the DEK.
 
 **Mitigation:** The 10-minute auto-lock reduces the exposure window. Lock the vault manually when stepping away. Keep the OS and software up to date.
 
