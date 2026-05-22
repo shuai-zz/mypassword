@@ -77,8 +77,7 @@
                                                VerticalAlignment="Center" />
                                     <Path Grid.Column="1" Width="16" Height="16" Margin="10,0,0,0"
                                           VerticalAlignment="Center" Stretch="None"
-                                          Fill="{Binding TotpPieBrush}" Data="{Binding TotpPie}"
-                                          ToolTip.Tip="{Binding Label}" />
+                                          Fill="{Binding TotpPieBrush}" Data="{Binding TotpPie}" />
                                     <Button Grid.Column="3" Classes="normal"
                                             Content="{DynamicResource password.btn.copy}"
                                             Command="{Binding CopyCommand}" Margin="6,0,0,0" />
