@@ -48,6 +48,7 @@ namespace MyPasswordDesktop.Controls
                 VerticalAlignment = VerticalAlignment.Center,
                 Cursor = new Cursor(StandardCursorType.Hand),
             };
+            button.Classes.Add("transparent");
             button.Click += (_, _) => textBox.RevealPassword = !textBox.RevealPassword;
 
             // keep the icon in sync whoever flips RevealPassword (the button, or a

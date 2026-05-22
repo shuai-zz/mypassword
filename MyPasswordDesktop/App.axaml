@@ -10,5 +10,20 @@
 
     <Application.Styles>
         <FluentTheme />
+        <!-- Borderless, transparent button (used for in-field icon affordances
+             such as the password-reveal eye). Suppresses Fluent's default
+             hover/pressed background fills so the icon sits flush. -->
+        <Style Selector="Button.transparent /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="Button.transparent:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="Button.transparent:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
     </Application.Styles>
 </Application>
