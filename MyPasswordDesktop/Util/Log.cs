@@ -42,7 +42,7 @@ namespace MyPasswordDesktop.Util
             {
                 // RollingFileAppender + TimeBasedRollingPolicy. Serilog dates the
                 // active file (mypassword<yyyyMMdd>.log); rotation/retention match.
-                string logFile = Path.Combine(FileUtils.GetAppDataDir(), "mypassword.log");
+                string logFile = FileUtils.GetLogFile();
                 config = config.WriteTo.File(
                     path: logFile,
                     rollingInterval: RollingInterval.Day,

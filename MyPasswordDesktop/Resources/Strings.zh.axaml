@@ -28,6 +28,7 @@
     <x:String x:Key="settings.clear_clipboard">复制的密码保留时长：</x:String>
     <x:String x:Key="settings.delete_after">回收站项目保留时长：</x:String>
     <x:String x:Key="settings.db_file">数据库文件：</x:String>
+    <x:String x:Key="settings.log_dir">日志目录：</x:String>
     <x:String x:Key="settings.minutes">{0} 分钟</x:String>
     <x:String x:Key="settings.days">{0} 天</x:String>
     <x:String x:Key="settings.never">永不删除</x:String>

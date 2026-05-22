@@ -54,7 +54,20 @@ namespace MyPasswordDesktop.Util
             return null;
         }
 
-        public static string GetLogFile() => Path.Combine(GetAppDataDir(), "mypassword.log");
+        /// <summary>
+        /// Return <c>~/.mypassword/logs</c>, creating it if missing.
+        /// </summary>
+        public static string GetLogDir()
+        {
+            string dir = Path.Combine(GetAppDataDir(), "logs");
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            return dir;
+        }
+
+        public static string GetLogFile() => Path.Combine(GetLogDir(), "mypassword.log");
 
         /// <summary>True when the path resolves to an existing regular file.</summary>
         public static bool IsValidVaultFile(string p) => p != null && File.Exists(p);

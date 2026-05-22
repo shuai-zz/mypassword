@@ -24,6 +24,7 @@
                     <ComboBox Grid.Column="1" x:Name="DeleteAfterCombo" HorizontalAlignment="Stretch" />
                 </Grid>
                 <TextBlock x:Name="DbFileText" Foreground="Gray" TextWrapping="Wrap" />
+                <TextBlock x:Name="LogDirText" Foreground="Gray" TextWrapping="Wrap" />
             </StackPanel>
         </TabItem>
 

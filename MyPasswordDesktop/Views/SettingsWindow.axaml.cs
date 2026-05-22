@@ -71,6 +71,8 @@ namespace MyPasswordDesktop.Views
 
             this.FindControl<TextBlock>("DbFileText").Text =
                 I18n.I18n.T("settings.db_file") + " " + (FileUtils.GetDbFile() ?? "");
+            this.FindControl<TextBlock>("LogDirText").Text =
+                I18n.I18n.T("settings.log_dir") + " " + FileUtils.GetLogDir();
         }
 
         // ── Security ─────────────────────────────────────────────────────────
