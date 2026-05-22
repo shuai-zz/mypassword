@@ -98,6 +98,17 @@ namespace MyPasswordDesktop.Views
             UiBridge.ShowPairRequest = ec => Dispatcher.UIThread.Post(() => ShowPairRequestAsync(ec));
 
             vm.ShowSettingsRequested += OpenSettings;
+            // Close the settings dialog whenever the window flips back to the
+            // unlock screen — so locking from the tray (or auto-lock) doesn't
+            // leave a vault-relative dialog hanging on top.
+            vm.PropertyChanged += (_, args) =>
+            {
+                if (args.PropertyName == nameof(MainWindowViewModel.Content)
+                    && vm.Content is UnlockViewModel)
+                {
+                    _settingsWindow?.Close();
+                }
+            };
             vm.WireCallbacks();
             SetupTray();
 
