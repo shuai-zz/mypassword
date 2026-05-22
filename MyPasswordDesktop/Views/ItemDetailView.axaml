@@ -33,7 +33,7 @@
 
         <!-- fields -->
         <ScrollViewer Grid.Row="2">
-            <ItemsControl ItemsSource="{Binding Rows}">
+            <ItemsControl ItemsSource="{Binding Rows}" Margin="0,0,16,0">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="vm:DetailRow">
                         <Grid ColumnDefinitions="90,*" Margin="0,5">
