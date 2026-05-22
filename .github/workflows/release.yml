@@ -28,24 +28,21 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
+      - name: Stamp version from tag
+        shell: pwsh
+        run: |
+          $ver = "${{ github.ref_name }}".TrimStart("v")
+          $proj = "MyPasswordDesktop/MyPasswordDesktop.csproj"
+          (Get-Content $proj) -replace "<Version>[^<]*</Version>", "<Version>$ver</Version>" | Set-Content $proj
+          Write-Host "Stamped version: $ver"
       - name: Publish (Native AOT, self-contained)
         run: dotnet publish MyPasswordDesktop/MyPasswordDesktop.csproj -c Release -r ${{ matrix.rid }} --self-contained true -o publish
-      - name: Strip debug symbols (Unix)
-        if: runner.os != 'Windows'
-        shell: bash
-        run: find publish -type f -name "*.pdb" -delete
-      - name: Strip debug symbols (Windows)
-        if: runner.os == 'Windows'
+      - name: Strip debug symbols
         shell: pwsh
         run: Get-ChildItem publish -Recurse -Filter *.pdb | Remove-Item -Force
-      - name: Zip publish (Unix)
-        if: runner.os != 'Windows'
-        shell: bash
-        run: cd publish && zip -r ../${{ matrix.artifact }}.zip .
-      - name: Zip publish (Windows)
-        if: runner.os == 'Windows'
+      - name: Zip publish
         shell: pwsh
-        run: Compress-Archive -Path publish\* -DestinationPath ${{ matrix.artifact }}.zip
+        run: Compress-Archive -Path publish/* -DestinationPath ${{ matrix.artifact }}.zip
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
