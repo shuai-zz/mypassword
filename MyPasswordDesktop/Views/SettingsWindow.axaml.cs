@@ -160,6 +160,7 @@ namespace MyPasswordDesktop.Views
                 grid.Children.Add(Cell(loggedIn ? FormatOAuth(rc) : I18n.I18n.T("settings.oauth.not_logged_in"), 1));
 
                 var btn = new Button { HorizontalAlignment = HorizontalAlignment.Right };
+                btn.Classes.Add("normal");
                 Grid.SetColumn(btn, 2);
                 if (loggedIn)
                 {
@@ -234,6 +235,7 @@ namespace MyPasswordDesktop.Views
                 if (ec.approve)
                 {
                     var unpair = new Button { Content = I18n.I18n.T("settings.extension.btn.unpair") };
+                    unpair.Classes.Add("normal");
                     unpair.Click += async (_, _) =>
                     {
                         bool ok = await Services.Dialogs.ConfirmAsync(I18n.I18n.T("confirm.title"),
@@ -249,8 +251,10 @@ namespace MyPasswordDesktop.Views
                 else
                 {
                     var approve = new Button { Content = I18n.I18n.T("settings.extension.btn.approve") };
+                    approve.Classes.Add("normal");
                     approve.Click += (_, _) => { Vault.ApproveExtension(ec.id, true); BuildExtensionRows(); };
                     var reject = new Button { Content = I18n.I18n.T("settings.extension.btn.reject") };
+                    reject.Classes.Add("normal");
                     reject.Click += (_, _) => { Vault.ApproveExtension(ec.id, false); BuildExtensionRows(); };
                     actions.Children.Add(approve);
                     actions.Children.Add(reject);

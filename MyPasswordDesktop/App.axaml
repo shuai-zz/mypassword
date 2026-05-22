@@ -10,10 +10,26 @@
 
     <Application.Styles>
         <FluentTheme />
-        <!-- Marker class for "standard" app buttons. Empty for now — a hook so
-             future tweaks (font, padding, etc.) land in one place rather than
-             touching every view. -->
-        <Style Selector="Button.normal" />
+        <!-- Standard app button. White fill with a thin gray rounded border;
+             on hover/press fills to gray with white text. -->
+        <Style Selector="Button.normal">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+        <Style Selector="Button.normal /template/ ContentPresenter">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#BBBBBB" />
+        </Style>
+        <Style Selector="Button.normal:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#808080" />
+            <Setter Property="BorderBrush" Value="#808080" />
+            <Setter Property="TextBlock.Foreground" Value="White" />
+        </Style>
+        <Style Selector="Button.normal:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#666666" />
+            <Setter Property="BorderBrush" Value="#666666" />
+            <Setter Property="TextBlock.Foreground" Value="White" />
+        </Style>
         <!-- Borderless, transparent button (used for in-field icon affordances
              such as the password-reveal eye). Suppresses Fluent's default
              hover/pressed background fills so the icon sits flush. -->
