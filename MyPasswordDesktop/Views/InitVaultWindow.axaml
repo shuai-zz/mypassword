@@ -19,9 +19,9 @@
                  controls:PasswordReveal.Enabled="True" />
         <TextBlock x:Name="ErrorText" Foreground="Red" TextWrapping="Wrap" TextAlignment="Center" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12" Margin="0,4">
-            <Button x:Name="CreateButton" Content="{DynamicResource init.btn.create}" Width="130"
+            <Button x:Name="CreateButton" Classes="normal" Content="{DynamicResource init.btn.create}" Width="130"
                     IsDefault="True" IsEnabled="False" />
-            <Button x:Name="CancelButton" Content="{DynamicResource init.btn.cancel}" Width="130"
+            <Button x:Name="CancelButton" Classes="normal" Content="{DynamicResource init.btn.cancel}" Width="130"
                     IsCancel="True" />
         </StackPanel>
     </StackPanel>

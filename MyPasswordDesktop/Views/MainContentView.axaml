@@ -7,7 +7,7 @@
 
         <!-- Toolbar -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto" Margin="6">
-            <Button Grid.Column="0" Content="{DynamicResource toolbar.btn.add_new}" Margin="0,0,6,0"
+            <Button Grid.Column="0" Classes="normal" Content="{DynamicResource toolbar.btn.add_new}" Margin="0,0,6,0"
                     IsEnabled="{Binding !IsEditing}">
                 <Button.Flyout>
                     <MenuFlyout>
@@ -23,9 +23,9 @@
             <TextBox Grid.Column="1" Text="{Binding SearchText}"
                      PlaceholderText="{DynamicResource toolbar.search.placeholder}" Margin="0,0,6,0"
                      IsEnabled="{Binding !IsEditing}" />
-            <Button Grid.Column="2" Content="{DynamicResource toolbar.btn.settings}"
+            <Button Grid.Column="2" Classes="normal" Content="{DynamicResource toolbar.btn.settings}"
                     Command="{Binding SettingsCommand}" Margin="0,0,6,0" />
-            <Button Grid.Column="3" Content="{DynamicResource toolbar.btn.lock}"
+            <Button Grid.Column="3" Classes="normal" Content="{DynamicResource toolbar.btn.lock}"
                     Command="{Binding LockCommand}" />
         </Grid>
 

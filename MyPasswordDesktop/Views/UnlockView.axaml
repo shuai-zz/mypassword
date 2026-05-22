@@ -21,7 +21,7 @@
                          PlaceholderText="{DynamicResource unlock.password.placeholder}"
                          MaxLength="50" Margin="0,0,6,0"
                          controls:PasswordReveal.Enabled="True" />
-                <Button Grid.Column="1" Content="{DynamicResource unlock.btn}"
+                <Button Grid.Column="1" Classes="normal" Content="{DynamicResource unlock.btn}"
                         Command="{Binding UnlockCommand}" IsDefault="True" />
             </Grid>
 
@@ -39,7 +39,7 @@
                                            VerticalAlignment="Center" />
                                 <TextBlock Grid.Column="1" Text="{Binding UserInfo}"
                                            VerticalAlignment="Center" />
-                                <Button Grid.Column="2" Content="{DynamicResource settings.oauth.btn.login}"
+                                <Button Grid.Column="2" Classes="normal" Content="{DynamicResource settings.oauth.btn.login}"
                                         Command="{Binding LoginCommand}" />
                             </Grid>
                         </DataTemplate>

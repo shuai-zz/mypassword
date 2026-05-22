@@ -66,7 +66,8 @@
                                  controls:PasswordReveal.Enabled="True" />
                     </Grid>
                     <TextBlock x:Name="PwMessage" />
-                    <Button x:Name="ChangePwButton" Content="{DynamicResource settings.password.btn.change}"
+                    <Button x:Name="ChangePwButton" Classes="normal"
+                            Content="{DynamicResource settings.password.btn.change}"
                             HorizontalAlignment="Right" />
                     <Separator Margin="0,8" />
                     <TextBlock Text="{DynamicResource settings.oauth.hint}" TextWrapping="Wrap" />

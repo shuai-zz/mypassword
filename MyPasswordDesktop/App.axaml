@@ -10,6 +10,10 @@
 
     <Application.Styles>
         <FluentTheme />
+        <!-- Marker class for "standard" app buttons. Empty for now — a hook so
+             future tweaks (font, padding, etc.) land in one place rather than
+             touching every view. -->
+        <Style Selector="Button.normal" />
         <!-- Borderless, transparent button (used for in-field icon affordances
              such as the password-reveal eye). Suppresses Fluent's default
              hover/pressed background fills so the icon sits flush. -->

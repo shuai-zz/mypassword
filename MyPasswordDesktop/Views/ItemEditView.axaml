@@ -8,8 +8,8 @@
 
         <!-- action bar -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8">
-            <Button Content="{DynamicResource edit.btn.save}" Command="{Binding SaveCommand}" />
-            <Button Content="{DynamicResource edit.btn.cancel}" Command="{Binding CancelCommand}" />
+            <Button Classes="normal" Content="{DynamicResource edit.btn.save}" Command="{Binding SaveCommand}" />
+            <Button Classes="normal" Content="{DynamicResource edit.btn.cancel}" Command="{Binding CancelCommand}" />
         </StackPanel>
         <Separator Grid.Row="1" Margin="0,8" />
 
@@ -32,7 +32,8 @@
                                     <TextBox Grid.Column="0" Text="{Binding Value}" PasswordChar="&#x2022;"
                                              RevealPassword="{Binding PasswordRevealed, Mode=TwoWay}"
                                              controls:PasswordReveal.Enabled="True" />
-                                    <Button Grid.Column="1" Content="{DynamicResource password.gen.btn}"
+                                    <Button Grid.Column="1" Classes="normal"
+                                            Content="{DynamicResource password.gen.btn}"
                                             Margin="6,0,0,0" Command="{Binding GenerateCommand}" />
                                 </Grid>
                                 <!-- multi values -->
@@ -42,19 +43,19 @@
                                             <DataTemplate x:DataType="vm:MultiEntry">
                                                 <Grid ColumnDefinitions="*,Auto" Margin="0,2">
                                                     <TextBox Grid.Column="0" Text="{Binding Text}" />
-                                                    <Button Grid.Column="1" Content="&#x2715;" Margin="6,0,0,0"
+                                                    <Button Grid.Column="1" Classes="normal" Content="&#x2715;" Margin="6,0,0,0"
                                                             Command="{Binding RemoveCommand}" />
                                                 </Grid>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                    <Button Content="{DynamicResource edit.btn.add_more}"
+                                    <Button Classes="normal" Content="{DynamicResource edit.btn.add_more}"
                                             Command="{Binding AddMultiCommand}" HorizontalAlignment="Left" />
                                 </StackPanel>
                                 <!-- removable info (passkey / totp) -->
                                 <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding IsRemovable}">
                                     <TextBlock Grid.Column="0" Text="{Binding Value}" VerticalAlignment="Center" />
-                                    <Button Grid.Column="1" Content="&#x2715;" Margin="6,0,0,0"
+                                    <Button Grid.Column="1" Classes="normal" Content="&#x2715;" Margin="6,0,0,0"
                                             Command="{Binding RemoveSelfCommand}" />
                                 </Grid>
                             </Panel>
