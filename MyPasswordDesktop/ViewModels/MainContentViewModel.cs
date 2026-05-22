@@ -41,7 +41,13 @@ namespace MyPasswordDesktop.ViewModels
         private string _searchText = "";
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsEditing))]
         private object _rightContent;
+
+        /// <summary>True while the right pane shows the edit form. The toolbar
+        /// search box, Add-New button, category list, and item list bind their
+        /// <c>IsEnabled</c> against this so they are locked during editing.</summary>
+        public bool IsEditing => RightContent is ItemEditViewModel;
 
         private bool _suppressSelection;
 

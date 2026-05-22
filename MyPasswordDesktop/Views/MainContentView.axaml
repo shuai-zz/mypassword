@@ -7,7 +7,8 @@
 
         <!-- Toolbar -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto" Margin="6">
-            <Button Grid.Column="0" Content="{DynamicResource toolbar.btn.add_new}" Margin="0,0,6,0">
+            <Button Grid.Column="0" Content="{DynamicResource toolbar.btn.add_new}" Margin="0,0,6,0"
+                    IsEnabled="{Binding !IsEditing}">
                 <Button.Flyout>
                     <MenuFlyout>
                         <MenuItem Header="{DynamicResource toolbar.menu.login}"
@@ -20,7 +21,8 @@
                 </Button.Flyout>
             </Button>
             <TextBox Grid.Column="1" Text="{Binding SearchText}"
-                     PlaceholderText="{DynamicResource toolbar.search.placeholder}" Margin="0,0,6,0" />
+                     PlaceholderText="{DynamicResource toolbar.search.placeholder}" Margin="0,0,6,0"
+                     IsEnabled="{Binding !IsEditing}" />
             <Button Grid.Column="2" Content="{DynamicResource toolbar.btn.settings}"
                     Command="{Binding SettingsCommand}" Margin="0,0,6,0" />
             <Button Grid.Column="3" Content="{DynamicResource toolbar.btn.lock}"
@@ -32,7 +34,8 @@
 
             <!-- Categories -->
             <ListBox Grid.Column="0" ItemsSource="{Binding Categories}"
-                     SelectedItem="{Binding SelectedCategory}">
+                     SelectedItem="{Binding SelectedCategory}"
+                     IsEnabled="{Binding !IsEditing}">
                 <ListBox.ItemTemplate>
                     <DataTemplate x:DataType="vm:CategoryItem">
                         <TextBlock Text="{Binding Name}" />
@@ -42,7 +45,8 @@
 
             <!-- Item list -->
             <ListBox Grid.Column="1" ItemsSource="{Binding Items}"
-                     SelectedItem="{Binding SelectedItemRow}">
+                     SelectedItem="{Binding SelectedItemRow}"
+                     IsEnabled="{Binding !IsEditing}">
                 <ListBox.ItemTemplate>
                     <DataTemplate x:DataType="vm:ItemRowViewModel">
                         <Grid ColumnDefinitions="Auto,*" Height="44">
