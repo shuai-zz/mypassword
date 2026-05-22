@@ -93,7 +93,12 @@ namespace MyPasswordDesktop.Views
 
             // ── wire UI bridges ──────────────────────────────────────────────
             ClipboardService.Instance.Attach(Clipboard);
-            UiBridge.ActivateApp = () => Dispatcher.UIThread.Post(ActivateWindow);
+            // When the browser extension triggers activation, the browser still
+            // owns focus at this instant — an immediate Activate() races with it
+            // and the window may stay behind. Wait ~200 ms for the browser to
+            // yield before pulling our window to the front.
+            UiBridge.ActivateApp = () => Task.Delay(200)
+                .ContinueWith(_ => Dispatcher.UIThread.Post(ActivateWindow));
             UiBridge.CopyPassword = pwd => ClipboardService.Instance.Copy(pwd);
             UiBridge.ShowPairRequest = ec => Dispatcher.UIThread.Post(() => ShowPairRequestAsync(ec));
 
