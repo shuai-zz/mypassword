@@ -26,7 +26,7 @@ namespace MyPasswordDesktop.Core.Web.Pkce
             Provider = provider;
             RecoveryConfig rc = VaultManager.Current.GetRecoveryConfig(provider);
             Config = (OAuthConfig)JsonUtils.FromJson(rc.oauth_config_json, typeof(OAuthConfig));
-            Log.Info($"Load oauth provider {provider}: {rc.oauth_config_json}");
+            Log.Info($"Load oauth provider {provider}: {rc.oauth_config_json} (client_secret is not sensitive since it's only used for PKCE flow).");
         }
 
         protected abstract string GetAuthUrl();
