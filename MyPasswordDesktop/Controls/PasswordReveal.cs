@@ -1,11 +1,8 @@
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 
 namespace MyPasswordDesktop.Controls
 {
@@ -25,9 +22,6 @@ namespace MyPasswordDesktop.Controls
 
         public static bool GetEnabled(TextBox element) => element.GetValue(EnabledProperty);
 
-        private static Bitmap _eyeOpen;
-        private static Bitmap _eyeClosed;
-
         static PasswordReveal()
         {
             EnabledProperty.Changed.AddClassHandler<TextBox>(OnEnabledChanged);
@@ -41,7 +35,7 @@ namespace MyPasswordDesktop.Controls
                 return;
             }
 
-            var icon = new Image { Width = 16, Height = 16 };
+            var icon = new PathIcon { Width = 16, Height = 16 };
             var button = new Button
             {
                 Content = icon,
@@ -70,14 +64,7 @@ namespace MyPasswordDesktop.Controls
             textBox.InnerRightContent = button;
         }
 
-        private static void UpdateIcon(Image icon, bool revealed)
-            => icon.Source = revealed ? EyeClosed : EyeOpen;
-
-        private static Bitmap EyeOpen => _eyeOpen ??= Load("eye_open");
-
-        private static Bitmap EyeClosed => _eyeClosed ??= Load("eye_closed");
-
-        private static Bitmap Load(string name)
-            => new(AssetLoader.Open(new Uri($"avares://MyPassword/Assets/icons/{name}.png")));
+        private static void UpdateIcon(PathIcon icon, bool revealed)
+            => icon.Data = revealed ? AppIcons.EyeClosed : AppIcons.EyeOpen;
     }
 }
