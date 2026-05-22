@@ -11,21 +11,34 @@
 
         <!-- General -->
         <TabItem Header="{DynamicResource settings.tab.general}">
-            <StackPanel Margin="16" Spacing="14">
-                <CheckBox x:Name="TrayCheck" Content="{DynamicResource settings.keep_tray_icon}" />
-                <Grid ColumnDefinitions="*,200">
-                    <TextBlock Grid.Column="0" Text="{DynamicResource settings.language}"
-                               VerticalAlignment="Center" />
-                    <ComboBox Grid.Column="1" x:Name="LangCombo" HorizontalAlignment="Stretch" />
-                </Grid>
-                <Grid ColumnDefinitions="*,200">
-                    <TextBlock Grid.Column="0" Text="{DynamicResource settings.delete_after}"
-                               VerticalAlignment="Center" />
-                    <ComboBox Grid.Column="1" x:Name="DeleteAfterCombo" HorizontalAlignment="Stretch" />
-                </Grid>
-                <TextBlock x:Name="DbFileText" Foreground="Gray" TextWrapping="Wrap" />
-                <TextBlock x:Name="LogDirText" Foreground="Gray" TextWrapping="Wrap" />
-            </StackPanel>
+            <Grid Margin="16" RowDefinitions="Auto,*,Auto">
+                <StackPanel Grid.Row="0" Spacing="14">
+                    <CheckBox x:Name="TrayCheck" Content="{DynamicResource settings.keep_tray_icon}" />
+                    <Grid ColumnDefinitions="*,200">
+                        <TextBlock Grid.Column="0" Text="{DynamicResource settings.language}"
+                                   VerticalAlignment="Center" />
+                        <ComboBox Grid.Column="1" x:Name="LangCombo" HorizontalAlignment="Stretch" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,200">
+                        <TextBlock Grid.Column="0" Text="{DynamicResource settings.delete_after}"
+                                   VerticalAlignment="Center" />
+                        <ComboBox Grid.Column="1" x:Name="DeleteAfterCombo" HorizontalAlignment="Stretch" />
+                    </Grid>
+                </StackPanel>
+                <!-- Row 1 (star) is the spacer that pushes the paths to the bottom -->
+                <StackPanel Grid.Row="2" Spacing="6">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource settings.db_file}" Foreground="Gray" />
+                        <TextBlock x:Name="DbFileText" Foreground="#3070D0" Cursor="Hand"
+                                   ToolTip.Tip="{DynamicResource settings.open_dir}" Margin="4,0,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource settings.log_dir}" Foreground="Gray" />
+                        <TextBlock x:Name="LogDirText" Foreground="#3070D0" Cursor="Hand"
+                                   ToolTip.Tip="{DynamicResource settings.open_dir}" Margin="4,0,0,0" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
         </TabItem>
 
         <!-- Security -->

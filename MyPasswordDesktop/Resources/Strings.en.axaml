@@ -29,6 +29,7 @@
     <x:String x:Key="settings.delete_after">Delete items in trash after:</x:String>
     <x:String x:Key="settings.db_file">Database file:</x:String>
     <x:String x:Key="settings.log_dir">Log directory:</x:String>
+    <x:String x:Key="settings.open_dir">Show in file explorer</x:String>
     <x:String x:Key="settings.minutes">{0} minute(s)</x:String>
     <x:String x:Key="settings.days">{0} days</x:String>
     <x:String x:Key="settings.never">Never</x:String>

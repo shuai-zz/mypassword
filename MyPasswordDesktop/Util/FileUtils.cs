@@ -69,6 +69,21 @@ namespace MyPasswordDesktop.Util
 
         public static string GetLogFile() => Path.Combine(GetLogDir(), "mypassword.log");
 
+        /// <summary>
+        /// Display-only path: replaces the user-home prefix with <c>~</c>
+        /// (e.g. <c>C:\Users\me\.mypassword</c> -> <c>~\.mypassword</c>).
+        /// </summary>
+        public static string CollapseHome(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return path;
+            string home = GetUserHome();
+            if (path.StartsWith(home, StringComparison.OrdinalIgnoreCase))
+            {
+                return "~" + path.Substring(home.Length);
+            }
+            return path;
+        }
+
         /// <summary>True when the path resolves to an existing regular file.</summary>
         public static bool IsValidVaultFile(string p) => p != null && File.Exists(p);
 

@@ -69,10 +69,22 @@ namespace MyPasswordDesktop.Views
             deleteAfter.SelectionChanged += (_, _) =>
                 Vault.SetSetting(SettingKey.DELETE_AFTER, DeleteAfterDays[Math.Max(0, deleteAfter.SelectedIndex)]);
 
-            this.FindControl<TextBlock>("DbFileText").Text =
-                I18n.I18n.T("settings.db_file") + " " + (FileUtils.GetDbFile() ?? "");
-            this.FindControl<TextBlock>("LogDirText").Text =
-                I18n.I18n.T("settings.log_dir") + " " + FileUtils.GetLogDir();
+            string dbFilePath = FileUtils.GetDbFile() ?? "";
+            var dbFileText = this.FindControl<TextBlock>("DbFileText");
+            dbFileText.Text = FileUtils.CollapseHome(dbFilePath);
+            dbFileText.PointerPressed += (_, _) =>
+            {
+                if (string.IsNullOrEmpty(dbFilePath)) return;
+                string dir = Path.GetDirectoryName(dbFilePath);
+                if (!string.IsNullOrEmpty(dir)) ShellUtils.OpenUrl(dir);
+            };
+            string logDirPath = FileUtils.GetLogDir();
+            var logDirText = this.FindControl<TextBlock>("LogDirText");
+            logDirText.Text = FileUtils.CollapseHome(logDirPath);
+            logDirText.PointerPressed += (_, _) =>
+            {
+                if (!string.IsNullOrEmpty(logDirPath)) ShellUtils.OpenUrl(logDirPath);
+            };
         }
 
         // ── Security ─────────────────────────────────────────────────────────
