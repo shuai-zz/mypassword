@@ -30,6 +30,27 @@
             <Setter Property="BorderBrush" Value="#666666" />
             <Setter Property="TextBlock.Foreground" Value="White" />
         </Style>
+        <!-- Destructive action button. Same shape as .normal but red text /
+             border; hover/press fills to red with white text. -->
+        <Style Selector="Button.danger">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="Foreground" Value="#E04F4F" />
+        </Style>
+        <Style Selector="Button.danger /template/ ContentPresenter">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#E04F4F" />
+        </Style>
+        <Style Selector="Button.danger:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E04F4F" />
+            <Setter Property="BorderBrush" Value="#E04F4F" />
+            <Setter Property="TextBlock.Foreground" Value="White" />
+        </Style>
+        <Style Selector="Button.danger:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#B83838" />
+            <Setter Property="BorderBrush" Value="#B83838" />
+            <Setter Property="TextBlock.Foreground" Value="White" />
+        </Style>
         <!-- Borderless, transparent button (used for in-field icon affordances
              such as the password-reveal eye). Suppresses Fluent's default
              hover/pressed background fills so the icon sits flush. -->

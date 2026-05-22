@@ -111,7 +111,7 @@
         <StackPanel Grid.Row="3" Spacing="8" Margin="0,8,0,0">
             <Separator Margin="0" />
             <TextBlock Text="{Binding LastEdit}" Foreground="Gray" />
-            <Button Classes="normal" Content="{DynamicResource detail.btn.delete}" Command="{Binding DeleteCommand}"
+            <Button Classes="danger" Content="{DynamicResource detail.btn.delete}" Command="{Binding DeleteCommand}"
                     IsVisible="{Binding IsActive}" HorizontalAlignment="Left" />
             <Button Classes="normal" Content="{DynamicResource detail.btn.restore}" Command="{Binding RestoreCommand}"
                     IsVisible="{Binding IsDeleted}" HorizontalAlignment="Left" />
