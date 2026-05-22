@@ -96,7 +96,7 @@
 
         <!-- bottom bar -->
         <StackPanel Grid.Row="3" Spacing="8" Margin="0,8,0,0">
-            <Separator />
+            <Separator Margin="0" />
             <TextBlock Text="{Binding LastEdit}" Foreground="Gray" />
             <Button Content="{DynamicResource detail.btn.delete}" Command="{Binding DeleteCommand}"
                     IsVisible="{Binding IsActive}" HorizontalAlignment="Left" />

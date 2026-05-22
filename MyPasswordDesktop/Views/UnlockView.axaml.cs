@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 
 namespace MyPasswordDesktop.Views
 {
@@ -8,6 +9,8 @@ namespace MyPasswordDesktop.Views
         public UnlockView()
         {
             AvaloniaXamlLoader.Load(this);
+            AttachedToVisualTree += (_, _) =>
+                Dispatcher.UIThread.Post(() => this.FindControl<TextBox>("PasswordBox")?.Focus());
         }
     }
 }

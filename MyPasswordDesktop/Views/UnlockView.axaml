@@ -17,7 +17,7 @@
                        TextWrapping="Wrap" TextAlignment="Center" />
 
             <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
-                <TextBox Grid.Column="0" Text="{Binding Password}" PasswordChar="&#x2022;"
+                <TextBox Grid.Column="0" x:Name="PasswordBox" Text="{Binding Password}" PasswordChar="&#x2022;"
                          PlaceholderText="{DynamicResource unlock.password.placeholder}"
                          MaxLength="50" Margin="0,0,6,0"
                          controls:PasswordReveal.Enabled="True" />
