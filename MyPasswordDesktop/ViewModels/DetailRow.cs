@@ -41,7 +41,7 @@ namespace MyPasswordDesktop.ViewModels
         private readonly string _plain;
         private readonly bool _canCopy;
 
-        public DetailRow(string label, string kind, string value, bool canCopy = true)
+        public DetailRow(string label, string kind, string value, bool canCopy = false)
         {
             Label = label;
             Kind = kind;
@@ -71,7 +71,7 @@ namespace MyPasswordDesktop.ViewModels
         public bool IsPassword => Kind == KindPassword;
         public bool IsMulti => Kind == KindMulti;
         public bool IsTotp => Kind == KindTotp;
-        public bool CanCopy => _canCopy && (Kind is KindPassword or KindTotp || (Kind == KindText && !string.IsNullOrEmpty(_plain)));
+        public bool CanCopy => _canCopy && Kind == KindText && !string.IsNullOrEmpty(_plain);
 
         private static string Mask(string s) => string.IsNullOrEmpty(s) ? "" : new string('•', 8);
 
