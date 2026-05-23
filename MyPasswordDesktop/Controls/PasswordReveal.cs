@@ -32,8 +32,14 @@ namespace MyPasswordDesktop.Controls
             if (e.NewValue is not true)
             {
                 textBox.InnerRightContent = null;
+                InputMethod.SetIsInputMethodEnabled(textBox, true);
                 return;
             }
+
+            // Password fields must not engage the OS IME — a CJK candidate
+            // window would surface preedit characters that bypass PasswordChar
+            // masking and could leak into the entered value.
+            InputMethod.SetIsInputMethodEnabled(textBox, false);
 
             var icon = new PathIcon { Width = 16, Height = 16 };
             var button = new Button
