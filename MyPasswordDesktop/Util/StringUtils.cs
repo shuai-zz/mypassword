@@ -43,7 +43,7 @@ namespace MyPasswordDesktop.Util
         public static string FormatDateTime(long ts)
         {
             var dt = DateTimeOffset.FromUnixTimeMilliseconds(ts).LocalDateTime;
-            return dt.ToString("d MMM yyyy, h:mm tt", _dateCulture);
+            return dt.ToString("g", _dateCulture);
         }
     }
 }
