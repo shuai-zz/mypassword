@@ -23,6 +23,8 @@ jobs:
             rid: linux-x64
             artifact: MyPassword-linux
     runs-on: ${{ matrix.os }}
+    env:
+      PUBLISH_DIR: MyPassword
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -36,13 +38,13 @@ jobs:
           (Get-Content $proj) -replace "<Version>[^<]*</Version>", "<Version>$ver</Version>" | Set-Content $proj
           Write-Host "Stamped version: $ver"
       - name: Publish (Native AOT, self-contained)
-        run: dotnet publish MyPasswordDesktop/MyPasswordDesktop.csproj -c Release -r ${{ matrix.rid }} --self-contained true -o publish
+        run: dotnet publish MyPasswordDesktop/MyPasswordDesktop.csproj -c Release -r ${{ matrix.rid }} --self-contained true -o ${{ env.PUBLISH_DIR }}
       - name: Strip debug symbols
         shell: pwsh
-        run: Get-ChildItem publish -Recurse -Filter *.pdb | Remove-Item -Force
+        run: Get-ChildItem ${{ env.PUBLISH_DIR }} -Recurse -Filter *.pdb | Remove-Item -Force
       - name: Zip publish
         shell: pwsh
-        run: Compress-Archive -Path publish/* -DestinationPath ${{ matrix.artifact }}.zip
+        run: Compress-Archive -Path ${{ env.PUBLISH_DIR }} -DestinationPath ${{ matrix.artifact }}.zip
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
