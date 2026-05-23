@@ -10,7 +10,7 @@
             <Button Grid.Column="0" Classes="normal" Content="{DynamicResource toolbar.btn.add_new}" Margin="0,0,6,0"
                     IsEnabled="{Binding !IsEditing}">
                 <Button.Flyout>
-                    <MenuFlyout>
+                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
                         <MenuItem Header="{DynamicResource toolbar.menu.login}"
                                   Command="{Binding AddLoginCommand}" />
                         <MenuItem Header="{DynamicResource toolbar.menu.note}"
