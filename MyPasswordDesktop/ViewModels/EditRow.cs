@@ -33,6 +33,9 @@ namespace MyPasswordDesktop.ViewModels
         public const string KindMulti = "multi";
         public const string KindRemovable = "removable";
 
+        public const int MinGenLength = 6;
+        public const int MaxGenLength = 30;
+
         public string Label { get; }
         public string Kind { get; }
         public string Tag { get; }
@@ -47,7 +50,42 @@ namespace MyPasswordDesktop.ViewModels
         private int _genLength = 16;
 
         [ObservableProperty]
+        private int _genStyle = PasswordUtils.StyleAlphabetNumber;
+
+        [ObservableProperty]
+        private bool _isGeneratorOpen;
+
+        [ObservableProperty]
         private bool _present = true;
+
+        public bool IsStyleAlphaNum
+        {
+            get => GenStyle == PasswordUtils.StyleAlphabetNumber;
+            set { if (value) GenStyle = PasswordUtils.StyleAlphabetNumber; }
+        }
+        public bool IsStyleAlpha
+        {
+            get => GenStyle == PasswordUtils.StyleAlphabet;
+            set { if (value) GenStyle = PasswordUtils.StyleAlphabet; }
+        }
+        public bool IsStyleNum
+        {
+            get => GenStyle == PasswordUtils.StyleNumber;
+            set { if (value) GenStyle = PasswordUtils.StyleNumber; }
+        }
+        public bool IsStyleAlphaNumSymbol
+        {
+            get => GenStyle == PasswordUtils.StyleAlphabetNumberSymbol;
+            set { if (value) GenStyle = PasswordUtils.StyleAlphabetNumberSymbol; }
+        }
+
+        partial void OnGenStyleChanged(int value)
+        {
+            OnPropertyChanged(nameof(IsStyleAlphaNum));
+            OnPropertyChanged(nameof(IsStyleAlpha));
+            OnPropertyChanged(nameof(IsStyleNum));
+            OnPropertyChanged(nameof(IsStyleAlphaNumSymbol));
+        }
 
         public ObservableCollection<MultiEntry> MultiValues { get; } = new();
 
@@ -104,10 +142,13 @@ namespace MyPasswordDesktop.ViewModels
         private void AddMulti() => MultiValues.Add(NewEntry(""));
 
         [RelayCommand]
+        private void ToggleGenerator() => IsGeneratorOpen = !IsGeneratorOpen;
+
+        [RelayCommand]
         private void Generate()
         {
-            int len = Math.Clamp(GenLength, 8, 32);
-            Value = PasswordUtils.GeneratePassword(len, PasswordUtils.StyleAlphabetNumber);
+            int len = Math.Clamp(GenLength, MinGenLength, MaxGenLength);
+            Value = PasswordUtils.GeneratePassword(len, GenStyle);
             PasswordRevealed = true;
         }
 
