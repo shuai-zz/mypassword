@@ -25,14 +25,14 @@
     <x:String x:Key="settings.language.name.en">English</x:String>
     <x:String x:Key="settings.language.name.zh">中文</x:String>
     <x:String x:Key="settings.auto_lock">设备空闲后自动锁定：</x:String>
-    <x:String x:Key="settings.clear_clipboard">复制的密码保留时长：</x:String>
+    <x:String x:Key="settings.clear_clipboard">指定时间后删除复制的密码：</x:String>
     <x:String x:Key="settings.delete_after">回收站项目保留时长：</x:String>
     <x:String x:Key="settings.db_file">数据库文件：</x:String>
     <x:String x:Key="settings.log_dir">日志目录：</x:String>
     <x:String x:Key="settings.open_dir">在文件管理器中显示</x:String>
     <x:String x:Key="settings.minutes">{0} 分钟</x:String>
     <x:String x:Key="settings.days">{0} 天</x:String>
-    <x:String x:Key="settings.never">永不删除</x:String>
+    <x:String x:Key="settings.never">永不</x:String>
     <x:String x:Key="settings.password.current">当前密码：</x:String>
     <x:String x:Key="settings.password.new">新密码：</x:String>
     <x:String x:Key="settings.password.confirm">确认新密码：</x:String>
