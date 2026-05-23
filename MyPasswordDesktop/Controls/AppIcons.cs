@@ -18,6 +18,16 @@ namespace MyPasswordDesktop.Controls
             "M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5" +
             "M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0");
 
+        // Bootstrap Icons — bi-caret-up (16x16)
+        public static readonly Geometry CaretUp = Geometry.Parse(
+            "M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48" +
+            "c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659");
+
+        // Bootstrap Icons — bi-caret-down (16x16)
+        public static readonly Geometry CaretDown = Geometry.Parse(
+            "M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48" +
+            "c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659");
+
         // Bootstrap Icons — bi-eye-slash (16x16)
         public static readonly Geometry EyeClosed = Geometry.Parse(
             "M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7 7 0 0 0-2.79.588l.77.771A6 6 0 0 1 8 3.5" +

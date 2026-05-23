@@ -34,9 +34,17 @@
                                                  RevealPassword="{Binding PasswordRevealed, Mode=TwoWay}"
                                                  controls:PasswordReveal.Enabled="True" />
                                         <Button Grid.Column="1" Classes="normal"
-                                                Content="{DynamicResource password.gen.btn}"
                                                 Margin="6,0,0,0"
-                                                Command="{Binding ToggleGeneratorCommand}" />
+                                                Command="{Binding ToggleGeneratorCommand}">
+                                            <Panel>
+                                                <PathIcon Width="12" Height="12"
+                                                          Data="{x:Static controls:AppIcons.CaretUp}"
+                                                          IsVisible="{Binding IsGeneratorOpen}" />
+                                                <PathIcon Width="12" Height="12"
+                                                          Data="{x:Static controls:AppIcons.CaretDown}"
+                                                          IsVisible="{Binding !IsGeneratorOpen}" />
+                                            </Panel>
+                                        </Button>
                                     </Grid>
                                     <Border IsVisible="{Binding IsGeneratorOpen}"
                                             BorderBrush="#CCCCCC" BorderThickness="1"
@@ -59,10 +67,10 @@
                                                         Value="{Binding GenLength, Mode=TwoWay}"
                                                         IsSnapToTickEnabled="True" TickFrequency="1"
                                                         VerticalAlignment="Center" />
-                                                <NumericUpDown Grid.Column="1" Width="90" Margin="8,0,0,0"
-                                                               Value="{Binding GenLength, Mode=TwoWay}"
-                                                               Minimum="6" Maximum="30"
-                                                               FormatString="0" />
+                                                <TextBlock Grid.Column="1" Width="20" Margin="8,0,0,0"
+                                                           Text="{Binding GenLength}"
+                                                           TextAlignment="Center"
+                                                           VerticalAlignment="Center" />
                                                 <Button Grid.Column="2" Classes="normal" Margin="8,0,0,0"
                                                         Content="{DynamicResource password.gen.btn}"
                                                         Command="{Binding GenerateCommand}" />
