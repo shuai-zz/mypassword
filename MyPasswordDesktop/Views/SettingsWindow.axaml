@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:MyPasswordDesktop.Controls"
         x:Class="MyPasswordDesktop.Views.SettingsWindow"
-        Width="580" Height="540"
+        Width="620" Height="500"
         CanResize="False"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
@@ -36,6 +36,10 @@
                         <TextBlock Text="{DynamicResource settings.log_dir}" Foreground="Gray" />
                         <TextBlock x:Name="LogDirText" Foreground="#3070D0" Cursor="Hand"
                                    ToolTip.Tip="{DynamicResource settings.open_dir}" Margin="4,0,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource settings.version}" Foreground="Gray" />
+                        <TextBlock x:Name="VersionText" Foreground="Gray" Margin="4,0,0,0" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

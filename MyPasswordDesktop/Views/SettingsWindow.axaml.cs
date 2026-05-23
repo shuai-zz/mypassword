@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Layout;
@@ -85,6 +86,21 @@ namespace MyPasswordDesktop.Views
             {
                 if (!string.IsNullOrEmpty(logDirPath)) ShellUtils.OpenUrl(logDirPath);
             };
+
+            this.FindControl<TextBlock>("VersionText").Text = GetAppVersion();
+        }
+
+        private static string GetAppVersion()
+        {
+            Assembly asm = Assembly.GetExecutingAssembly();
+            string informational = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            if (!string.IsNullOrEmpty(informational))
+            {
+                int plus = informational.IndexOf('+');
+                return plus >= 0 ? informational.Substring(0, plus) : informational;
+            }
+            Version v = asm.GetName().Version;
+            return v == null ? "" : $"{v.Major}.{v.Minor}.{v.Build}";
         }
 
         // ── Security ─────────────────────────────────────────────────────────
