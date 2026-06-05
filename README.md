@@ -5,6 +5,8 @@ Open source desktop password manager.
 - Website & documentation: <https://mypassword.puppylab.org>
 - Download: <https://github.com/michaelliao/mypassword/releases/latest>
 
+![screenshot](docs/assets/images/screenshot.png)
+
 ## Features
 
 - Local-first vault — all data stays on your machine, encrypted at rest.
