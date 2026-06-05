@@ -24,6 +24,10 @@
     <x:String x:Key="settings.language.system">System default</x:String>
     <x:String x:Key="settings.language.name.en">English</x:String>
     <x:String x:Key="settings.language.name.zh">中文</x:String>
+    <x:String x:Key="settings.theme">Appearance:</x:String>
+    <x:String x:Key="settings.theme.system">Follow system</x:String>
+    <x:String x:Key="settings.theme.light">Light</x:String>
+    <x:String x:Key="settings.theme.dark">Dark</x:String>
     <x:String x:Key="settings.auto_lock">Lock after the device is idle for:</x:String>
     <x:String x:Key="settings.clear_clipboard">Remove copied password after:</x:String>
     <x:String x:Key="settings.delete_after">Delete items in trash after:</x:String>

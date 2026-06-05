@@ -8,6 +8,28 @@
         <local:ViewLocator/>
     </Application.DataTemplates>
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Resting-state button colors. The hover/pressed fills (gray with
+                 white text) read fine in both variants, but the resting fill was
+                 hardcoded white — invisible against light text in dark mode.
+                 These per-variant brushes keep the white look in light mode and
+                 give a readable dark fill in dark mode. -->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ButtonRestBackground" Color="White" />
+                    <SolidColorBrush x:Key="ButtonRestForeground" Color="#1A1A1A" />
+                    <SolidColorBrush x:Key="ButtonRestBorder" Color="#BBBBBB" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="ButtonRestBackground" Color="#333333" />
+                    <SolidColorBrush x:Key="ButtonRestForeground" Color="#F0F0F0" />
+                    <SolidColorBrush x:Key="ButtonRestBorder" Color="#666666" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
     <Application.Styles>
         <FluentTheme />
         <!-- Standard app button. White fill with a thin gray rounded border;
@@ -19,9 +41,12 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
+        <Style Selector="Button.normal">
+            <Setter Property="Foreground" Value="{DynamicResource ButtonRestForeground}" />
+        </Style>
         <Style Selector="Button.normal /template/ ContentPresenter">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="BorderBrush" Value="#BBBBBB" />
+            <Setter Property="Background" Value="{DynamicResource ButtonRestBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonRestBorder}" />
         </Style>
         <Style Selector="Button.normal:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="#808080" />
@@ -44,7 +69,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
         <Style Selector="Button.danger /template/ ContentPresenter">
-            <Setter Property="Background" Value="White" />
+            <Setter Property="Background" Value="{DynamicResource ButtonRestBackground}" />
             <Setter Property="BorderBrush" Value="#E04F4F" />
         </Style>
         <Style Selector="Button.danger:pointerover /template/ ContentPresenter">

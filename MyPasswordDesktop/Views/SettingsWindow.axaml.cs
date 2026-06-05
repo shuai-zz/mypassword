@@ -22,6 +22,7 @@ namespace MyPasswordDesktop.Views
         private const int MinPwLen = 8;
 
         private static readonly string[] Languages = { "", "en", "zh" };
+        private static readonly string[] Themes = { "", "light", "dark" };
         private static readonly int[] AutoLockMinutes = { 1, 2, 5, 10, 15, 30, 60, 0 };
         private static readonly int[] ClearClipboardMinutes = { 1, 2, 5, 0 };
         private static readonly int[] DeleteAfterDays = { 7, 14, 30, 90, 180, 0 };
@@ -63,6 +64,22 @@ namespace MyPasswordDesktop.Views
             lang.SelectedIndex = Math.Max(0, Array.IndexOf(Languages, curLang));
             lang.SelectionChanged += (_, _) =>
                 Vault.SetSetting(SettingKey.LANGUAGE, Languages[Math.Max(0, lang.SelectedIndex)]);
+
+            var theme = this.FindControl<ComboBox>("ThemeCombo");
+            theme.ItemsSource = new List<string>
+            {
+                I18n.I18n.T("settings.theme.system"),
+                I18n.I18n.T("settings.theme.light"),
+                I18n.I18n.T("settings.theme.dark"),
+            };
+            string curTheme = Vault.GetSetting(SettingKey.THEME, "");
+            theme.SelectedIndex = Math.Max(0, Array.IndexOf(Themes, curTheme));
+            theme.SelectionChanged += (_, _) =>
+            {
+                string value = Themes[Math.Max(0, theme.SelectedIndex)];
+                Vault.SetSetting(SettingKey.THEME, value);
+                ThemeManager.Apply(value);
+            };
 
             var deleteAfter = this.FindControl<ComboBox>("DeleteAfterCombo");
             deleteAfter.ItemsSource = DaysOptions(DeleteAfterDays);

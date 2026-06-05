@@ -24,6 +24,10 @@
     <x:String x:Key="settings.language.system">系统默认</x:String>
     <x:String x:Key="settings.language.name.en">English</x:String>
     <x:String x:Key="settings.language.name.zh">中文</x:String>
+    <x:String x:Key="settings.theme">外观：</x:String>
+    <x:String x:Key="settings.theme.system">跟随系统</x:String>
+    <x:String x:Key="settings.theme.light">浅色</x:String>
+    <x:String x:Key="settings.theme.dark">深色</x:String>
     <x:String x:Key="settings.auto_lock">设备空闲后自动锁定：</x:String>
     <x:String x:Key="settings.clear_clipboard">指定时间后删除复制的密码：</x:String>
     <x:String x:Key="settings.delete_after">回收站项目保留时长：</x:String>

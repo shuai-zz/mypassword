@@ -72,6 +72,7 @@ namespace MyPasswordDesktop.Views
             var vault = new VaultManager(db);
             string lang = vault.GetSetting(SettingKey.LANGUAGE, "");
             I18n.I18n.Init(lang);
+            ThemeManager.Apply(vault.GetSetting(SettingKey.THEME, ""));
             StringUtils.InitDateTimeLocale(lang);
             Session.Current.StartAutoLockThread();
 
