@@ -135,7 +135,7 @@
     <x:String x:Key="field.title">标题：</x:String>
     <x:String x:Key="field.username">用户名：</x:String>
     <x:String x:Key="field.password">密码：</x:String>
-    <x:String x:Key="field.totp">TOTP 两步验证：</x:String>
+    <x:String x:Key="field.totp">TOTP 验证：</x:String>
     <x:String x:Key="field.passkey">通行密钥：</x:String>
     <x:String x:Key="field.websites">网站：</x:String>
     <x:String x:Key="field.memo">备注：</x:String>
