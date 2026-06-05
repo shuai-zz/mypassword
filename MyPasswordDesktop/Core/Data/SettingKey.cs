@@ -22,5 +22,8 @@ namespace MyPasswordDesktop.Core.Data
 
         /// <summary>UI language. "" = system default.</summary>
         public const string LANGUAGE = "language";
+
+        /// <summary>UI theme variant: "" = follow system, "light", or "dark".</summary>
+        public const string THEME = "theme";
     }
 }

@@ -20,6 +20,11 @@
                         <ComboBox Grid.Column="1" x:Name="LangCombo" HorizontalAlignment="Stretch" />
                     </Grid>
                     <Grid ColumnDefinitions="*,200">
+                        <TextBlock Grid.Column="0" Text="{DynamicResource settings.theme}"
+                                   VerticalAlignment="Center" />
+                        <ComboBox Grid.Column="1" x:Name="ThemeCombo" HorizontalAlignment="Stretch" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,200">
                         <TextBlock Grid.Column="0" Text="{DynamicResource settings.delete_after}"
                                    VerticalAlignment="Center" />
                         <ComboBox Grid.Column="1" x:Name="DeleteAfterCombo" HorizontalAlignment="Stretch" />
