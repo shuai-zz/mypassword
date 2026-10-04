@@ -176,10 +176,13 @@ namespace MyPasswordDesktop.Views
 
         private void ActivateWindow()
         {
+            MacApplicationPolicy.PrepareToShowWindow();
             Show();
             WindowState = WindowState.Normal;
             Activate();
         }
+
+        public void RestoreWindow() => ActivateWindow();
 
         // ── extension pairing prompt ─────────────────────────────────────────
 
@@ -194,6 +197,8 @@ namespace MyPasswordDesktop.Views
 
         private void OpenSettings()
         {
+            MacApplicationPolicy.PrepareToShowWindow();
+
             // a settings dialog is already open — activate it instead of
             // opening a duplicate.
             if (_settingsWindow != null)
@@ -207,20 +212,35 @@ namespace MyPasswordDesktop.Views
             }
             _settingsWindow = new SettingsWindow();
             _settingsWindow.Closed += (_, _) => _settingsWindow = null;
-            _settingsWindow.Show(this);
+            // Avalonia rejects a hidden owner. In tray-only mode, settings
+            // must be a standalone window so the main window can stay hidden.
+            if (IsVisible)
+            {
+                _settingsWindow.Show(this);
+            }
+            else
+            {
+                _settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                _settingsWindow.ShowInTaskbar = true;
+                _settingsWindow.Show();
+            }
+            _settingsWindow.Activate();
         }
 
         // ── lifecycle ────────────────────────────────────────────────────────
 
         private void OnClosing(object sender, WindowClosingEventArgs e)
         {
+            bool shuttingDown = e.CloseReason is WindowCloseReason.ApplicationShutdown
+                or WindowCloseReason.OSShutdown;
+            Log.Info($"window closing: reason={e.CloseReason}, exiting={_exiting}");
             // desktop.Shutdown() below closes this window again, re-entering
             // OnClosing — let that pass straight through to avoid recursion.
             if (_teardownDone)
             {
                 return;
             }
-            if (!_exiting)
+            if (!_exiting && !shuttingDown)
             {
                 // a plain window close keeps the app alive in the tray unless
                 // the user disabled that setting.
@@ -229,6 +249,7 @@ namespace MyPasswordDesktop.Views
                 if (keepInTray)
                 {
                     e.Cancel = true;
+                    _settingsWindow?.Close();
                     Hide();
                     return;
                 }
@@ -238,7 +259,10 @@ namespace MyPasswordDesktop.Views
             // shut the application down.
             _teardownDone = true;
             _daemon?.Stop();
-            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            _trayIcon?.Dispose();
+            // Dock Quit / Cmd+Q already run inside the lifetime shutdown loop.
+            // Do not turn that request into Hide(), or re-enter Shutdown().
+            if (!shuttingDown && Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.Shutdown();
             }

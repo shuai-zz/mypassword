@@ -81,9 +81,14 @@ namespace MyPasswordDesktop
 
         // Avalonia configuration, don't remove; also used by the visual designer.
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
+        {
+            var builder = AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
                 .LogToTrace();
+            if (OperatingSystem.IsMacOS())
+                builder.With(new MacOSPlatformOptions { ShowInDock = true });
+            return builder;
+        }
     }
 }

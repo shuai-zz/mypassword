@@ -1,6 +1,10 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
+using MyPasswordDesktop.Util;
+using MyPasswordDesktop.Services;
 using MyPasswordDesktop.ViewModels;
 using MyPasswordDesktop.Views;
 
@@ -10,6 +14,8 @@ namespace MyPasswordDesktop
     {
         public override void Initialize()
         {
+            if (OperatingSystem.IsMacOS())
+                Name = "MyPassword";
             AvaloniaXamlLoader.Load(this);
         }
 
@@ -29,6 +35,21 @@ namespace MyPasswordDesktop
                 var vm = new MainWindowViewModel();
                 var window = new MainWindow { DataContext = vm };
                 desktop.MainWindow = window;
+                MacApplicationPolicy.Attach(desktop);
+                // macOS sends Reopen to the application feature, rather than
+                // to the classic desktop lifetime. Use the public AOT-safe API.
+                if (OperatingSystem.IsMacOS()
+                    && TryGetFeature(typeof(IActivatableLifetime)) is IActivatableLifetime activatable)
+                {
+                    activatable.Activated += (_, e) =>
+                    {
+                        if (e.Kind == ActivationKind.Reopen)
+                        {
+                            Log.Info("macOS reopen: restoring main window");
+                            Dispatcher.UIThread.Post(window.RestoreWindow);
+                        }
+                    };
+                }
             }
 
             base.OnFrameworkInitializationCompleted();
